@@ -8,11 +8,6 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9514904833890236" crossorigin="anonymous"></script>
 
-  <!-- AMP Auto Ads -->
-  <script async custom-element="amp-auto-ads"
-          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-  </script>
-
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -36,10 +31,6 @@
   </style>
 </head>
 <body>
-  <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-9514904833890236">
-  </amp-auto-ads>
-
   <div id="app"><iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse"></iframe></div>
   <button id="ai-open" aria-label="Open EarthPulse AI">✦ EarthPulse AI</button>
   <section id="ai-panel" aria-label="EarthPulse AI assistant">
@@ -48,18 +39,14 @@
     <form id="ai-form"><input id="ai-input" autocomplete="off" placeholder="Ask about Earth, climate, storms…"><button id="ai-send" type="submit">Send</button></form>
   </section>
   <script>
-    // Also load AdSense inside the embedded dashboard document.
     const earthFrame=document.getElementById('earthpulse-frame');
     earthFrame.addEventListener('load',()=>{
       try{
         const doc=earthFrame.contentDocument;
-        if(doc && doc.head && !doc.querySelector('script[data-earthpulse-adsense]')){
-          const s=doc.createElement('script');
-          s.async=true;
-          s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9514904833890236';
-          s.crossOrigin='anonymous';
-          s.dataset.earthpulseAdsense='1';
-          doc.head.appendChild(s);
+        if(doc && doc.head){
+          // Remove AMP Auto Ads if it was previously inserted into the embedded page.
+          doc.querySelectorAll('amp-auto-ads').forEach(el=>el.remove());
+          doc.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(el=>el.remove());
         }
       }catch(_){/* same-origin expected on EarthPulse */}
     });
