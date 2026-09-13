@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/earthpulse-ai.js": {
+      "maxDuration": 30
+    }
+  }
+}
