@@ -8,6 +8,11 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9514904833890236" crossorigin="anonymous"></script>
 
+  <!-- AMP Auto Ads -->
+  <script async custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+  </script>
+
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -31,6 +36,10 @@
   </style>
 </head>
 <body>
+  <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-9514904833890236">
+  </amp-auto-ads>
+
   <div id="app"><iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse"></iframe></div>
   <button id="ai-open" aria-label="Open EarthPulse AI">✦ EarthPulse AI</button>
   <section id="ai-panel" aria-label="EarthPulse AI assistant">
