@@ -1,11 +1,23 @@
 // EarthPulse AI — Vercel serverless backend
 // POST /api/earthpulse-ai
 // Uses the TaBiToken OpenAI-compatible chat API.
-// API key stays server-side in Vercel Environment Variables.
+// The key stays server-side in Vercel Environment Variables.
 
 const API_KEY = process.env.TABIAI_API_KEY || process.env.ANTHROPIC_API_KEY;
 const BASE_URL = (process.env.TABIAI_BASE_URL || 'https://tabitoken.com/v1').replace(/\/$/, '');
-const MODEL = process.env.TABIAI_MODEL || 'claude-opus-5';
+
+// TaBiAI currently exposes Claude Opus models through its OpenAI-compatible API.
+// Try the preferred model first, then fall back when the key/group denies a model.
+const REQUESTED_MODEL = process.env.TABIAI_MODEL || '';
+const MODELS = REQUESTED_MODEL
+  ? [REQUESTED_MODEL]
+  : [
+      'claude-opus-5',
+      'claude-opus-5-thinking',
+      'claude-opus-4-8',
+      'claude-opus-4-8-thinking'
+    ];
+
 const MAX_MESSAGES = 20;
 const MAX_MESSAGE_CHARS = 4000;
 const MAX_CONTEXT_CHARS = 9000;
@@ -75,24 +87,27 @@ async function callTabiAI({ apiKey, model, system, messages }) {
       signal: controller.signal
     });
 
+    let detail = '';
+    let data = null;
+    try {
+      data = await response.json();
+      detail = data?.error?.message || data?.message || '';
+    } catch (_) {}
+
     if (!response.ok) {
-      let detail = '';
-      try {
-        const body = await response.json();
-        detail = body?.error?.message || body?.message || '';
-      } catch (_) {}
       const error = new Error(`Provider HTTP ${response.status}${detail ? `: ${detail}` : ''}`);
       error.status = response.status;
+      error.providerMessage = detail;
       throw error;
     }
 
-    const data = await response.json();
     const text = data?.choices?.[0]?.message?.content;
     if (!text) {
       const error = new Error('Provider returned no assistant text.');
       error.status = 502;
       throw error;
     }
+
     return String(text).trim();
   } finally {
     clearTimeout(timeout);
@@ -109,7 +124,9 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
-    if (jsonSize(body) > MAX_BODY_BYTES) return res.status(413).json({ message: 'Request is too large.' });
+    if (jsonSize(body) > MAX_BODY_BYTES) {
+      return res.status(413).json({ message: 'Request is too large.' });
+    }
 
     const { messages, context } = body;
     if (!Array.isArray(messages) || !messages.length) {
@@ -127,25 +144,61 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ message: 'No usable message content was supplied.' });
     }
 
-    const text = await callTabiAI({
-      apiKey: API_KEY,
-      model: MODEL,
-      system: buildSystemPrompt(context),
-      messages: normalized
-    });
+    let lastError = null;
 
-    return res.status(200).json({ text });
+    for (const model of MODELS) {
+      try {
+        const text = await callTabiAI({
+          apiKey: API_KEY,
+          model,
+          system: buildSystemPrompt(context),
+          messages: normalized
+        });
+
+        return res.status(200).json({ text, model });
+      } catch (error) {
+        lastError = error;
+
+        // A forbidden/unknown model can be a per-key group restriction.
+        // Try the next supported model before failing the whole assistant.
+        if (![400, 403, 404].includes(error?.status)) break;
+      }
+    }
+
+    throw lastError || new Error('No TaBiAI model succeeded.');
   } catch (error) {
     const status = Number.isInteger(error?.status) ? error.status : 502;
     console.error('earthpulse-ai error:', error?.message || 'Unknown error');
 
-    if (status === 400) return res.status(502).json({ message: 'TaBiAI rejected the request (HTTP 400). Check the model configuration.' });
-    if (status === 401) return res.status(502).json({ message: 'TaBiAI rejected the API key (HTTP 401).' });
-    if (status === 403) return res.status(502).json({ message: 'TaBiAI denied access to this key/model (HTTP 403).' });
-    if (status === 429) return res.status(502).json({ message: 'TaBiAI rate limit or quota reached (HTTP 429).' });
-    if (status === 413) return res.status(413).json({ message: 'Request is too large.' });
-    if (status === 504 || error?.name === 'AbortError') return res.status(504).json({ message: 'TaBiAI request timed out. Please try again.' });
+    if (status === 400) {
+      return res.status(502).json({
+        message: 'TaBiAI rejected the request or model configuration (HTTP 400).'
+      });
+    }
+    if (status === 401) {
+      return res.status(502).json({
+        message: 'TaBiAI rejected the API key (HTTP 401).'
+      });
+    }
+    if (status === 403 || status === 404) {
+      return res.status(502).json({
+        message: 'TaBiAI denied access to every configured model for this key (HTTP 403/404). Check the key group/model permissions in TaBiAI.'
+      });
+    }
+    if (status === 429) {
+      return res.status(502).json({
+        message: 'TaBiAI rate limit or quota reached (HTTP 429).'
+      });
+    }
+    if (status === 413) {
+      return res.status(413).json({ message: 'Request is too large.' });
+    }
+    if (status === 504 || error?.name === 'AbortError') {
+      return res.status(504).json({ message: 'TaBiAI request timed out. Please try again.' });
+    }
 
-    return res.status(502).json({ message: `TaBiAI service unavailable (HTTP ${status}).` });
+    return res.status(502).json({
+      message: `TaBiAI service unavailable (HTTP ${status}).`
+    });
   }
 };
