@@ -6,31 +6,19 @@
   <meta name="theme-color" content="#020617">
   <meta name="description" content="EarthPulse — interactive Earth intelligence dashboard for climate, weather, earthquakes, storms, air quality and space weather.">
   <title>EarthPulse — Earth Intelligence</title>
-
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9514904833890236" crossorigin="anonymous"></script>
-
-  <!-- Vercel Web Analytics -->
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
   <script defer src="/_vercel/insights/script.js"></script>
-
   <style>
     :root{--bg:#020617;--panel:rgba(15,23,42,.9);--line:rgba(148,163,184,.18);--text:#e5e7eb;--muted:#94a3b8;--accent:#38bdf8}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--bg)}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-    button{font:inherit}
-    #shell{min-height:100vh}
-    #command{position:sticky;top:0;z-index:100;height:62px;display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(2,6,23,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}button{font:inherit}
+    #shell{min-height:100vh}#command{position:sticky;top:0;z-index:100;height:62px;display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(2,6,23,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
     .brand{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:800;letter-spacing:.02em;white-space:nowrap}.brand-dot{width:10px;height:10px;border-radius:50%;background:#38bdf8;box-shadow:0 0 16px #38bdf8}.brand small{display:block;color:var(--muted);font-size:9px;font-weight:600;letter-spacing:.12em}
     .cmd{border:1px solid var(--line);background:rgba(15,23,42,.75);color:#cbd5e1;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer;transition:.18s}.cmd:hover{border-color:rgba(56,189,248,.55);color:white;transform:translateY(-1px)}.cmd.primary{background:rgba(14,116,144,.25);border-color:rgba(56,189,248,.35)}
     #status{display:flex;align-items:center;gap:6px;padding:0 4px;color:#86efac;font-size:10px;font-weight:800;white-space:nowrap}.status-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e}
-    #dashboard-wrap{width:100%;min-height:calc(100vh - 62px)}
-    #earthpulse-frame{display:block;width:100%;height:calc(100vh - 62px);min-height:900px;border:0;background:var(--bg)}
-    #feature-deck{max-width:1400px;margin:0 auto;padding:42px 22px 90px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    .feature{min-height:150px;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(2,6,23,.92));box-shadow:0 12px 35px rgba(0,0,0,.22)}.feature h3{margin:0 0 8px;font-size:14px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}.feature b{color:#bae6fd}.feature .tag{display:inline-block;margin-bottom:12px;padding:4px 7px;border-radius:999px;background:rgba(56,189,248,.1);color:#7dd3fc;font-size:9px;font-weight:800;letter-spacing:.1em}
-    #progress{position:fixed;left:0;top:0;height:2px;width:0;background:#38bdf8;box-shadow:0 0 12px #38bdf8;z-index:200;transition:width .1s linear}
-    #toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#0f172a;color:#e2e8f0;border:1px solid var(--line);padding:10px 14px;border-radius:11px;font-size:12px;font-weight:700;z-index:300;transition:.22s;box-shadow:0 12px 35px rgba(0,0,0,.45)}#toast.show{opacity:1;transform:translate(-50%,0)}
+    #dashboard-wrap{width:100%;min-height:calc(100vh - 62px)}#earthpulse-frame{display:block;width:100%;height:calc(100vh - 62px);min-height:900px;border:0;background:var(--bg)}
+    #feature-deck{max-width:1400px;margin:0 auto;padding:42px 22px 90px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.feature{min-height:150px;padding:20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(2,6,23,.92));box-shadow:0 12px 35px rgba(0,0,0,.22)}.feature h3{margin:0 0 8px;font-size:14px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}.feature b{color:#bae6fd}.feature .tag{display:inline-block;margin-bottom:12px;padding:4px 7px;border-radius:999px;background:rgba(56,189,248,.1);color:#7dd3fc;font-size:9px;font-weight:800;letter-spacing:.1em}
+    #progress{position:fixed;left:0;top:0;height:2px;width:0;background:#38bdf8;box-shadow:0 0 12px #38bdf8;z-index:200;transition:width .1s linear}#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#0f172a;color:#e2e8f0;border:1px solid var(--line);padding:10px 14px;border-radius:11px;font-size:12px;font-weight:700;z-index:300;transition:.22s;box-shadow:0 12px 35px rgba(0,0,0,.45)}#toast.show{opacity:1;transform:translate(-50%,0)}
     @media(max-width:900px){#command{height:auto;min-height:58px;flex-wrap:wrap}.brand{min-width:130px}.cmd{padding:7px 9px;font-size:11px}#status{display:none}#earthpulse-frame{height:calc(100vh - 58px);min-height:760px}#feature-deck{grid-template-columns:repeat(2,minmax(0,1fr));padding:28px 14px 70px}}
     @media(max-width:560px){#command{gap:6px;padding:8px}.brand{width:100%;margin-right:0}.cmd{flex:1;text-align:center}.cmd:nth-of-type(4),.cmd:nth-of-type(5){display:none}#earthpulse-frame{min-height:720px}.feature-deck{grid-template-columns:1fr}}
   </style>
@@ -41,82 +29,31 @@
     <nav id="command" aria-label="EarthPulse command center">
       <div class="brand"><span class="brand-dot"></span><div>EARTHPULSE<small>EARTH INTELLIGENCE</small></div></div>
       <div id="status"><span class="status-dot"></span>LIVE UI</div>
-      <button class="cmd primary" id="focus-globe">◉ Globe</button>
+      <button class="cmd primary" id="focus-globe">◉ 3D Globe</button>
       <button class="cmd" id="top-btn">⌃ Top</button>
       <button class="cmd" id="refresh-btn">↻ Refresh</button>
       <button class="cmd" id="fullscreen-btn">⛶ Focus</button>
     </nav>
-
-    <main id="dashboard-wrap">
-      <iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse interactive dashboard"></iframe>
-    </main>
-
+    <main id="dashboard-wrap"><iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse interactive dashboard"></iframe></main>
     <section id="feature-deck" aria-label="EarthPulse feature highlights">
-      <article class="feature"><span class="tag">INTERACTIVE</span><h3>3D Earth Explorer</h3><p>Drag the globe, zoom with the wheel or pinch, and use <b>Globe</b> to jump back to the interactive Earth view.</p></article>
+      <article class="feature"><span class="tag">INTERACTIVE</span><h3>3D Earth Explorer</h3><p>Open the dedicated WebGL globe and <b>drag to rotate</b>, wheel or pinch to zoom, reset the view, or enable auto-rotation.</p></article>
       <article class="feature"><span class="tag">ANALYTICS</span><h3>Earth Intelligence</h3><p>Explore climate, seismic, weather, atmospheric and space-weather information without leaving the dashboard.</p></article>
-      <article class="feature"><span class="tag">RESILIENT</span><h3>Data-aware interface</h3><p>Unavailable feeds are kept visibly separate from real observations instead of silently presenting invented values.</p></article>
+      <article class="feature"><span class="tag">RESILIENT</span><h3>Data-aware interface</h3><p>Unavailable feeds remain visibly separate from real observations instead of silently presenting invented values.</p></article>
       <article class="feature"><span class="tag">MOBILE</span><h3>Scrollable workspace</h3><p>The dashboard remains vertically navigable on desktop and mobile, with a persistent command bar for quick movement.</p></article>
     </section>
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
-
+  <script src="/globe-enhancer.js"></script>
   <script>
-  const frame=document.getElementById('earthpulse-frame');
-  const toastEl=document.getElementById('toast');
-  const progress=document.getElementById('progress');
-  let toastTimer;
-  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),1800)}
-
-  function enhanceDashboard(){
-    try{
-      const doc=frame.contentDocument;
-      if(!doc)return;
-      // Remove AMP Auto Ads if an older cached embedded build still contains them.
-      doc.querySelectorAll('amp-auto-ads').forEach(e=>e.remove());
-      doc.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(e=>e.remove());
-
-      // Restore reliable scrolling inside the embedded standalone React dashboard.
-      doc.documentElement.style.height='100%';
-      doc.body.style.minHeight='100vh';
-      doc.body.style.overflow='auto';
-      const main=doc.querySelector('.earthpulse-main');
-      if(main){main.style.overflowY='auto';main.style.overflowX='hidden';main.style.overscrollBehaviorY='contain';}
-
-      // Make every Three.js canvas an explicit interactive surface.
-      doc.querySelectorAll('canvas').forEach(canvas=>{
-        canvas.style.touchAction='none';
-        canvas.style.cursor='grab';
-        canvas.addEventListener('pointerdown',()=>canvas.style.cursor='grabbing',{passive:true});
-        const release=()=>canvas.style.cursor='grab';
-        canvas.addEventListener('pointerup',release,{passive:true});
-        canvas.addEventListener('pointercancel',release,{passive:true});
-        canvas.addEventListener('pointerleave',release,{passive:true});
-      });
-
-      // Give the globe a stable resize signal when the viewport changes.
-      window.addEventListener('resize',()=>{
-        try{doc.defaultView.dispatchEvent(new Event('resize'))}catch(_){ }
-      },{passive:true});
-      toast('EarthPulse interface enhanced');
-    }catch(e){toast('Dashboard loaded with basic mode')}
-  }
-  frame.addEventListener('load',enhanceDashboard);
-
-  document.getElementById('refresh-btn').onclick=()=>{frame.contentWindow.location.reload();toast('Refreshing EarthPulse…')};
-  document.getElementById('top-btn').onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});try{frame.contentWindow.scrollTo({top:0,behavior:'smooth'});frame.contentDocument.querySelector('.earthpulse-main')?.scrollTo({top:0,behavior:'smooth'})}catch(_){}};
-  document.getElementById('focus-globe').onclick=()=>{
-    try{
-      const doc=frame.contentDocument;
-      const target=doc.querySelector('.earthpulse-globe-panel')||doc.querySelector('.earthpulse-globe-mount')||doc.querySelector('canvas');
-      if(target)target.scrollIntoView({behavior:'smooth',block:'center'});else frame.scrollIntoView({behavior:'smooth',block:'center'});
-      toast('Focused on interactive globe');
-    }catch(_){frame.scrollIntoView({behavior:'smooth',block:'center'})}
-  };
-  document.getElementById('fullscreen-btn').onclick=()=>{
-    const el=document.getElementById('earthpulse-frame');
-    if(!document.fullscreenElement){el.requestFullscreen?.().catch(()=>toast('Fullscreen unavailable in this browser'))}else document.exitFullscreen?.();
-  };
-  window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?(scrollY/max)*100:0)+'%'} ,{passive:true});
+    const frame=document.getElementById('earthpulse-frame'),toastEl=document.getElementById('toast'),progress=document.getElementById('progress');let toastTimer;
+    function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),1800)}
+    function enhanceDashboard(){try{const doc=frame.contentDocument;if(!doc)return;doc.querySelectorAll('amp-auto-ads').forEach(e=>e.remove());doc.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(e=>e.remove());doc.documentElement.style.height='100%';doc.body.style.minHeight='100vh';doc.body.style.overflow='auto';const main=doc.querySelector('.earthpulse-main');if(main){main.style.overflowY='auto';main.style.overflowX='hidden';main.style.overscrollBehaviorY='contain'}doc.querySelectorAll('canvas').forEach(canvas=>{canvas.style.touchAction='none';canvas.style.cursor='grab';canvas.addEventListener('pointerdown',()=>canvas.style.cursor='grabbing',{passive:true});const release=()=>canvas.style.cursor='grab';canvas.addEventListener('pointerup',release,{passive:true});canvas.addEventListener('pointercancel',release,{passive:true});canvas.addEventListener('pointerleave',release,{passive:true})});window.addEventListener('resize',()=>{try{doc.defaultView.dispatchEvent(new Event('resize'))}catch(_){ }},{passive:true});toast('EarthPulse interface ready')}catch(e){toast('Dashboard loaded with basic mode')}}
+    frame.addEventListener('load',enhanceDashboard);
+    document.getElementById('refresh-btn').onclick=()=>{frame.contentWindow.location.reload();toast('Refreshing EarthPulse…')};
+    document.getElementById('top-btn').onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});try{frame.contentWindow.scrollTo({top:0,behavior:'smooth'});frame.contentDocument.querySelector('.earthpulse-main')?.scrollTo({top:0,behavior:'smooth'})}catch(_){}};
+    document.getElementById('focus-globe').onclick=()=>{if(window.EarthPulseOpenGlobe){window.EarthPulseOpenGlobe()}else{toast('Loading 3D globe…');window.dispatchEvent(new Event('earthpulse:open-globe'))}};
+    document.getElementById('fullscreen-btn').onclick=()=>{const el=document.getElementById('earthpulse-frame');if(!document.fullscreenElement){el.requestFullscreen?.().catch(()=>toast('Fullscreen unavailable in this browser'))}else document.exitFullscreen?.()};
+    window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?(scrollY/max)*100:0)+'%'},{passive:true});
   </script>
 </body>
 </html>
