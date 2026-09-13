@@ -19,6 +19,7 @@
     #ai-messages{height:calc(100% - 122px);overflow:auto;padding:14px}
     .msg{max-width:88%;padding:10px 12px;border-radius:13px;margin:0 0 10px;white-space:pre-wrap;line-height:1.45;font-size:13px}
     .bot{background:#0f172a;border:1px solid rgba(148,163,184,.13);margin-right:auto}.user{background:#1d4ed8;margin-left:auto}
+    .error{background:#3f1219;border:1px solid rgba(248,113,113,.3)}
     #ai-form{height:64px;display:flex;gap:8px;padding:10px;border-top:1px solid rgba(148,163,184,.16);box-sizing:border-box}
     #ai-input{min-width:0;flex:1;border:1px solid #334155;border-radius:11px;background:#0f172a;color:#fff;padding:10px 12px;outline:none}
     #ai-send{border:0;border-radius:11px;background:#2563eb;color:#fff;padding:0 15px;font-weight:700;cursor:pointer}.busy{opacity:.6;pointer-events:none}
@@ -36,12 +37,32 @@
   <script>
     const openBtn=document.getElementById('ai-open'),panel=document.getElementById('ai-panel'),closeBtn=document.getElementById('ai-close'),messagesEl=document.getElementById('ai-messages'),form=document.getElementById('ai-form'),input=document.getElementById('ai-input'),send=document.getElementById('ai-send');
     const messages=[{role:'assistant',content:'I’m EarthPulse AI. Ask me about Earth science, climate, storms, earthquakes, solar activity, air quality, oceans, or how to interpret EarthPulse data.'}];
-    function render(){messagesEl.innerHTML='';messages.forEach(m=>{const d=document.createElement('div');d.className='msg '+(m.role==='user'?'user':'bot');d.textContent=m.content;messagesEl.appendChild(d)});messagesEl.scrollTop=messagesEl.scrollHeight}
+    function addMessage(content,role='assistant',extra=''){messages.push({role,content,extra})}
+    function render(){messagesEl.innerHTML='';messages.forEach(m=>{const d=document.createElement('div');d.className='msg '+(m.role==='user'?'user':'bot')+(m.extra?' '+m.extra:'');d.textContent=m.content;messagesEl.appendChild(d)});messagesEl.scrollTop=messagesEl.scrollHeight}
     function toggle(v){panel.style.display=v?'block':'none';if(v){input.focus();render()}}
     openBtn.onclick=()=>toggle(true);closeBtn.onclick=()=>toggle(false);render();
-    form.onsubmit=async e=>{e.preventDefault();const text=input.value.trim();if(!text)return;messages.push({role:'user',content:text});input.value='';render();send.classList.add('busy');send.textContent='…';
-      try{const r=await fetch('/api/earthpulse-ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages,context:{currentPage:'EarthPulse dashboard',note:'This assistant is embedded in the EarthPulse dashboard. Only use data explicitly supplied in context; if live values are unavailable, say so.'}})});const d=await r.json();if(!r.ok)throw new Error(d.message||'AI service unavailable.');messages.push({role:'assistant',content:d.text||'No answer was returned.'})}
-      catch(err){messages.push({role:'assistant',content:'EarthPulse AI is currently unavailable. Check the Vercel API deployment and AI environment variable, then try again.'})}
+    form.onsubmit=async e=>{
+      e.preventDefault();
+      const text=input.value.trim();
+      if(!text)return;
+      addMessage(text,'user');
+      input.value='';
+      render();
+      send.classList.add('busy');send.textContent='…';
+      try{
+        const r=await fetch('/api/earthpulse-ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:messages.filter(m=>m.role==='user'||m.role==='assistant').map(m=>({role:m.role,content:m.content})),context:{currentPage:'EarthPulse dashboard',note:'This assistant is embedded in the EarthPulse dashboard. Only use data explicitly supplied in context; if live values are unavailable, say so.'}})});
+        let d={};
+        try{d=await r.json()}catch(_){d={message:'The AI backend returned a non-JSON response.'}}
+        if(!r.ok){
+          let msg=d.message||('AI backend returned HTTP '+r.status+'.');
+          if(r.status===401||r.status===403)msg='Anthropic rejected the API key. Check that ANTHROPIC_API_KEY is an Anthropic key and is configured for the deployed Vercel environment.';
+          else if(r.status===404)msg='AI API route was not found. Confirm api/earthpulse-ai.js is deployed with this project.';
+          else if(r.status===503)msg=d.message||'ANTHROPIC_API_KEY is missing from the deployed Vercel environment.';
+          else if(r.status===504)msg=d.message||'The AI request timed out.';
+          throw new Error(msg)
+        }
+        addMessage(d.text||'The AI backend returned an empty answer.','assistant',d.text?'':'error');
+      }catch(err){addMessage('AI ERROR: '+(err?.message||'Unknown error'),'assistant','error')}
       finally{send.classList.remove('busy');send.textContent='Send';render()}
     };
   </script>
