@@ -5,7 +5,8 @@
     }
   },
   "rewrites": [
-    { "source": "/", "destination": "/home-globe-overlay.html" }
+    { "source": "/", "destination": "/home-globe-overlay.html" },
+    { "source": "/planet-pulse.html", "destination": "/planet-pulse-v2.html" }
   ],
   "headers": [
     {
