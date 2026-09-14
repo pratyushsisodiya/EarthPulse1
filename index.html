@@ -13,24 +13,26 @@
 :root{--bg:#050505;--panel:#111;--panel2:#171717;--text:#f5f5f5;--muted:#a1a1a1;--line:#2a2a2a;--cyan:#67e8f9;--violet:#a78bfa;--green:#86efac}
 *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}button{font:inherit}a{text-decoration:none;color:inherit}
 .topbar{position:sticky;top:0;z-index:1000;height:54px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(5,5,5,.86);backdrop-filter:blur(20px)}.topnav{display:flex;gap:24px;white-space:nowrap;overflow:auto;max-width:1180px;padding:0 18px;color:#a3a3a3;font-size:12px}.topnav a{transition:.2s}.topnav a:hover{color:#fff}.topnav a.nav-highlight{color:#8eefff}.topnav a.nav-highlight:hover{color:#fff}
-.brandmark{position:absolute;left:22px;display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.08em;font-size:12px}.brandmark i{display:block;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px rgba(103,232,249,.75)}
-.hero{min-height:88vh;display:grid;place-items:center;padding:90px 24px 70px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.12),transparent 30%),radial-gradient(circle at 20% 20%,rgba(167,139,250,.08),transparent 25%);filter:blur(12px)}.hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;text-align:center}.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8b8b8b;margin-bottom:18px}.hero h1{font-size:clamp(52px,9vw,118px);line-height:.9;letter-spacing:-.07em;margin:0 auto;max-width:1050px;font-weight:800}.hero p{font-size:clamp(16px,2vw,21px);line-height:1.55;color:#a3a3a3;max-width:720px;margin:28px auto 32px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.btn{border:1px solid #303030;background:#161616;color:#f5f5f5;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:750;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#555}.btn.primary{background:#f5f5f5;color:#090909;border-color:#f5f5f5}.hero-orb{margin:70px auto 0;width:min(62vw,620px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8de8ff 0%,#187da5 22%,#082f49 52%,#020617 75%,#000 100%);box-shadow:0 0 120px rgba(56,189,248,.2),inset -45px -50px 80px rgba(0,0,0,.7);position:relative;animation:float 7s ease-in-out infinite}.hero-orb:before{content:"";position:absolute;inset:-7%;border-radius:50%;border:1px solid rgba(103,232,249,.15);box-shadow:0 0 90px rgba(103,232,249,.12)}.hero-orb:after{content:"";position:absolute;inset:13%;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 22px,rgba(255,255,255,.035) 23px),repeating-linear-gradient(90deg,transparent 0 28px,rgba(255,255,255,.028) 29px);mix-blend-mode:screen;opacity:.65}@keyframes float{50%{transform:translateY(-10px) scale(1.01)}}
-.latest{padding:34px 0 110px}.latest-head{max-width:1180px;margin:0 auto;padding:0 22px 28px}.latest-head h2{margin:0;font-size:clamp(30px,4vw,48px);letter-spacing:-.045em;font-weight:780}.latest-head p{margin:10px 0 0;color:#8c8c8c;font-size:14px}.carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 7vw 22px;scrollbar-width:none}.carousel::-webkit-scrollbar{display:none}.card{flex:0 0 min(430px,70vw);height:560px;scroll-snap-align:start;border-radius:28px;overflow:hidden;position:relative;background:#121212;border:1px solid rgba(255,255,255,.08);transition:transform .35s,box-shadow .35s}.card:hover{transform:translateY(-7px);box-shadow:0 30px 80px rgba(0,0,0,.36)}.card-copy{position:relative;z-index:3;padding:30px 28px}.card-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}.card h3{font-size:33px;line-height:1;letter-spacing:-.05em;margin:0 0 10px}.card p{max-width:290px;color:#9f9f9f;font-size:14px;line-height:1.5;margin:0}.card-art{position:absolute;inset:0}.card-dark{background:linear-gradient(145deg,#000 0%,#121212 60%,#090909 100%)}.card-light{background:linear-gradient(160deg,#f5f5f5,#d9d9d9);color:#161616}.card-light p{color:#555}.card-blue{background:radial-gradient(circle at 65% 65%,rgba(103,232,249,.45),transparent 23%),linear-gradient(145deg,#061522,#020b13 70%)}.card-purple{background:radial-gradient(circle at 58% 66%,rgba(167,139,250,.5),transparent 25%),linear-gradient(145deg,#0b0818,#05050a 70%)}.card-green{background:radial-gradient(circle at 55% 75%,rgba(74,222,128,.3),transparent 25%),linear-gradient(145deg,#07110a,#050706 72%)}.visual-globe{position:absolute;width:72%;aspect-ratio:1;border-radius:50%;left:14%;top:40%;background:radial-gradient(circle at 34% 27%,#b9f4ff 0,#2080aa 19%,#0a3956 54%,#01111c 80%);box-shadow:0 0 100px rgba(56,189,248,.24),inset -35px -35px 60px rgba(0,0,0,.72);transform:rotate(-12deg)}.visual-globe:after{content:"";position:absolute;inset:11%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 16px,rgba(255,255,255,.045) 17px 18px);opacity:.8}.visual-radar{position:absolute;width:72%;aspect-ratio:1;left:14%;top:40%;border:1px solid rgba(167,139,250,.35);border-radius:50%;box-shadow:0 0 0 38px rgba(167,139,250,.035),0 0 0 76px rgba(167,139,250,.025)}.visual-radar:after{content:"";position:absolute;width:48%;height:1px;left:50%;top:50%;background:linear-gradient(90deg,rgba(167,139,250,.7),transparent);transform-origin:left center;animation:spin 3.4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.visual-target{position:absolute;left:50%;top:62%;width:90px;height:90px;border:1px solid rgba(255,255,255,.24);border-radius:50%;transform:translate(-50%,-50%)}.visual-target:before,.visual-target:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.18);border-radius:50%}.visual-target:after{inset:43px;background:#86efac;border:0;box-shadow:0 0 28px rgba(134,239,172,.65)}.visual-ai{position:absolute;left:12%;right:12%;bottom:12%;padding:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);backdrop-filter:blur(14px);border-radius:20px}.visual-ai strong{display:block;font-size:14px}.visual-ai span{display:block;color:#8e8e8e;font-size:11px;margin-top:5px}.visual-lines{position:absolute;inset:38% 8% 0;background:linear-gradient(transparent,rgba(103,232,249,.04)),repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.028) 32px);mask-image:linear-gradient(to top,#000,transparent)}
+.brandmark{position:absolute;left:22px;display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.08em;font-size:12px;cursor:pointer;user-select:none}.brandmark i{display:block;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px rgba(103,232,249,.75)}
+.hero{min-height:88vh;display:grid;place-items:center;padding:90px 24px 70px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.12),transparent 30%),radial-gradient(circle at 20% 20%,rgba(167,139,250,.08),transparent 25%);filter:blur(12px)}.hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;text-align:center}.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8b8b8b;margin-bottom:18px;cursor:pointer;user-select:none}.hero h1{font-size:clamp(52px,9vw,118px);line-height:.9;letter-spacing:-.07em;margin:0 auto;max-width:1050px;font-weight:800;cursor:default;user-select:none}.hero p{font-size:clamp(16px,2vw,21px);line-height:1.55;color:#a3a3a3;max-width:720px;margin:28px auto 32px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.btn{border:1px solid #303030;background:#161616;color:#f5f5f5;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:750;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#555}.btn.primary{background:#f5f5f5;color:#090909;border-color:#f5f5f5}.hero-orb{margin:70px auto 0;width:min(62vw,620px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8de8ff 0%,#187da5 22%,#082f49 52%,#020617 75%,#000 100%);box-shadow:0 0 120px rgba(56,189,248,.2),inset -45px -50px 80px rgba(0,0,0,.7);position:relative;animation:float 7s ease-in-out infinite}.hero-orb:before{content:"";position:absolute;inset:-7%;border-radius:50%;border:1px solid rgba(103,232,249,.15);box-shadow:0 0 90px rgba(103,232,249,.12)}.hero-orb:after{content:"";position:absolute;inset:13%;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 22px,rgba(255,255,255,.035) 23px),repeating-linear-gradient(90deg,transparent 0 28px,rgba(255,255,255,.028) 29px);mix-blend-mode:screen;opacity:.65}@keyframes float{50%{transform:translateY(-10px) scale(1.01)}}
+.latest{padding:34px 0 110px}.latest-head{max-width:1180px;margin:0 auto;padding:0 22px 28px}.latest-head h2{margin:0;font-size:clamp(30px,4vw,48px);letter-spacing:-.045em;font-weight:780;cursor:pointer;user-select:none}.latest-head p{margin:10px 0 0;color:#8c8c8c;font-size:14px}.carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 7vw 22px;scrollbar-width:none}.carousel::-webkit-scrollbar{display:none}.card{flex:0 0 min(430px,70vw);height:560px;scroll-snap-align:start;border-radius:28px;overflow:hidden;position:relative;background:#121212;border:1px solid rgba(255,255,255,.08);transition:transform .35s,box-shadow .35s}.card:hover{transform:translateY(-7px);box-shadow:0 30px 80px rgba(0,0,0,.36)}.card-copy{position:relative;z-index:3;padding:30px 28px}.card-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;cursor:pointer}.card h3{font-size:33px;line-height:1;letter-spacing:-.05em;margin:0 0 10px}.card p{max-width:290px;color:#9f9f9f;font-size:14px;line-height:1.5;margin:0}.card-art{position:absolute;inset:0}.card-dark{background:linear-gradient(145deg,#000 0%,#121212 60%,#090909 100%)}.card-light{background:linear-gradient(160deg,#f5f5f5,#d9d9d9);color:#161616}.card-light p{color:#555}.card-blue{background:radial-gradient(circle at 65% 65%,rgba(103,232,249,.45),transparent 23%),linear-gradient(145deg,#061522,#020b13 70%)}.card-purple{background:radial-gradient(circle at 58% 66%,rgba(167,139,250,.5),transparent 25%),linear-gradient(145deg,#0b0818,#05050a 70%)}.card-green{background:radial-gradient(circle at 55% 75%,rgba(74,222,128,.3),transparent 25%),linear-gradient(145deg,#07110a,#050706 72%)}.visual-globe{position:absolute;width:72%;aspect-ratio:1;border-radius:50%;left:14%;top:40%;background:radial-gradient(circle at 34% 27%,#b9f4ff 0,#2080aa 19%,#0a3956 54%,#01111c 80%);box-shadow:0 0 100px rgba(56,189,248,.24),inset -35px -35px 60px rgba(0,0,0,.72);transform:rotate(-12deg)}.visual-globe:after{content:"";position:absolute;inset:11%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 16px,rgba(255,255,255,.045) 17px 18px);opacity:.8}.visual-radar{position:absolute;width:72%;aspect-ratio:1;left:14%;top:40%;border:1px solid rgba(167,139,250,.35);border-radius:50%;box-shadow:0 0 0 38px rgba(167,139,250,.035),0 0 0 76px rgba(167,139,250,.025)}.visual-radar:after{content:"";position:absolute;width:48%;height:1px;left:50%;top:50%;background:linear-gradient(90deg,rgba(167,139,250,.7),transparent);transform-origin:left center;animation:spin 3.4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.visual-target{position:absolute;left:50%;top:62%;width:90px;height:90px;border:1px solid rgba(255,255,255,.24);border-radius:50%;transform:translate(-50%,-50%)}.visual-target:before,.visual-target:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.18);border-radius:50%}.visual-target:after{inset:43px;background:#86efac;border:0;box-shadow:0 0 28px rgba(134,239,172,.65)}.visual-ai{position:absolute;left:12%;right:12%;bottom:12%;padding:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);backdrop-filter:blur(14px);border-radius:20px}.visual-ai strong{display:block;font-size:14px}.visual-ai span{display:block;color:#8e8e8e;font-size:11px;margin-top:5px}.visual-lines{position:absolute;inset:38% 8% 0;background:linear-gradient(transparent,rgba(103,232,249,.04)),repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.028) 32px);mask-image:linear-gradient(to top,#000,transparent)}
 .card-footer{position:absolute;bottom:24px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#777;z-index:4}.card-light .card-footer{color:#666}.arrow{width:28px;height:28px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center}
-.dashboard{padding:100px 0 120px;background:#080808;border-top:1px solid #161616}.dash-head{max-width:1180px;margin:0 auto;padding:0 22px 35px}.dash-head h2{font-size:clamp(34px,5vw,62px);letter-spacing:-.05em;margin:0}.dash-head p{color:#8d8d8d;max-width:650px;line-height:1.6}.frame-wrap{max-width:1380px;margin:auto;padding:0 18px}.frame-wrap iframe{display:block;width:100%;height:min(980px,86vh);min-height:760px;border:1px solid #202020;border-radius:28px;background:#020617;box-shadow:0 35px 110px rgba(0,0,0,.45)}
-.feature-strip{max-width:1180px;margin:0 auto;padding:80px 22px 120px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feature{padding:24px;border-top:1px solid #2a2a2a}.feature small{display:block;color:#737373;letter-spacing:.1em;text-transform:uppercase;font-size:9px;margin-bottom:10px}.feature h4{margin:0 0 7px;font-size:18px}.feature p{margin:0;color:#8b8b8b;font-size:12px;line-height:1.55}
-.footer{padding:28px 22px 60px;border-top:1px solid #171717;color:#686868;font-size:11px;text-align:center}
-#progress{position:fixed;left:0;top:0;height:2px;background:var(--cyan);width:0;z-index:5000;box-shadow:0 0 15px rgba(103,232,249,.55)}
-.globe-pin{position:absolute;left:58%;top:34%;width:18px;height:18px;border:0;border-radius:50%;background:#67e8f9;box-shadow:0 0 0 5px rgba(103,232,249,.12),0 0 30px rgba(103,232,249,.9);cursor:pointer;z-index:8;padding:0}.globe-pin:before{content:"";position:absolute;inset:-8px;border:1px solid rgba(103,232,249,.55);border-radius:50%;animation:pinPulse 1.8s ease-out infinite}.globe-pin:hover{transform:scale(1.18)}.globe-pin-label{position:absolute;left:58%;top:34%;transform:translate(14px,-8px);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8eefff;white-space:nowrap;pointer-events:none;text-shadow:0 0 12px rgba(103,232,249,.7)}.globe-brand{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);font-size:9px;font-weight:800;letter-spacing:.18em;color:rgba(255,255,255,.72);white-space:nowrap;pointer-events:none;text-shadow:0 2px 12px #000}.funny-popup{position:fixed;right:26px;top:82px;z-index:5000;width:min(380px,calc(100vw - 32px));padding:16px;border:1px solid rgba(103,232,249,.28);border-radius:18px;background:rgba(7,12,18,.92);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 40px rgba(103,232,249,.12);backdrop-filter:blur(20px);display:none}.funny-popup.open{display:block;animation:popupIn .28s ease}.funny-top{display:flex;align-items:center;gap:8px;color:#72e8f8;font-size:9px;font-weight:800;letter-spacing:.18em}.funny-top i{width:6px;height:6px;border-radius:50%;background:#67e8f9;box-shadow:0 0 12px #67e8f9}.funny-close{margin-left:auto;border:0;background:transparent;color:#7d8b91;font-size:20px;cursor:pointer;line-height:1}.funny-message{margin-top:12px;font-size:17px;line-height:1.3;font-weight:750;color:#f5f5f5}.funny-sub{margin-top:10px;color:#708087;font-size:9px;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}@keyframes pinPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}@keyframes popupIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+.dashboard{padding:100px 0 120px;background:#080808;border-top:1px solid #161616}.dash-head{max-width:1180px;margin:0 auto;padding:0 22px 35px}.dash-head h2{font-size:clamp(34px,5vw,62px);letter-spacing:-.05em;margin:0;cursor:pointer;user-select:none}.dash-head p{color:#8d8d8d;max-width:650px;line-height:1.6}.frame-wrap{max-width:1380px;margin:auto;padding:0 18px}.frame-wrap iframe{display:block;width:100%;height:min(980px,86vh);min-height:760px;border:1px solid #202020;border-radius:28px;background:#020617;box-shadow:0 35px 110px rgba(0,0,0,.45)}
+.feature-strip{max-width:1180px;margin:0 auto;padding:80px 22px 120px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feature{padding:24px;border-top:1px solid #2a2a2a;cursor:pointer}.feature small{display:block;color:#737373;letter-spacing:.1em;text-transform:uppercase;font-size:9px;margin-bottom:10px}.feature h4{margin:0 0 7px;font-size:18px}.feature p{margin:0;color:#8b8b8b;font-size:12px;line-height:1.55}
+.footer{padding:28px 22px 60px;border-top:1px solid #171717;color:#686868;font-size:11px;text-align:center;position:relative}.footer .footer-secret{display:inline-block;margin-left:8px;color:#222;cursor:pointer;user-select:none;transition:color .2s}.footer .footer-secret:hover{color:#5b6670}
+#progress{position:fixed;left:0;top:0;height:2px;background:var(--cyan);width:0;z-index:5000;box-shadow:0 0 15px rgba(103,232,249,.55);cursor:pointer}
+.globe-pin{position:absolute;left:58%;top:34%;width:18px;height:18px;border:0;border-radius:50%;background:#67e8f9;box-shadow:0 0 0 5px rgba(103,232,249,.12),0 0 30px rgba(103,232,249,.9);cursor:pointer;z-index:8;padding:0}.globe-pin:before{content:"";position:absolute;inset:-8px;border:1px solid rgba(103,232,249,.55);border-radius:50%;animation:pinPulse 1.8s ease-out infinite}.globe-pin:hover{transform:scale(1.18)}.globe-pin-label{position:absolute;left:58%;top:34%;transform:translate(14px,-8px);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#8eefff;white-space:nowrap;pointer-events:none;text-shadow:0 0 12px rgba(103,232,249,.7)}.globe-brand{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);font-size:9px;font-weight:800;letter-spacing:.18em;color:rgba(255,255,255,.72);white-space:nowrap;pointer-events:none;text-shadow:0 2px 12px #000}
+.egg-dot{position:absolute;width:7px;height:7px;border-radius:50%;border:1px solid rgba(103,232,249,.3);background:rgba(103,232,249,.06);box-shadow:0 0 10px rgba(103,232,249,.08);cursor:pointer;z-index:7;transition:.2s}.egg-dot:hover{transform:scale(1.8);background:rgba(103,232,249,.4);box-shadow:0 0 18px rgba(103,232,249,.45)}.egg-1{left:23%;top:22%}.egg-2{left:78%;top:63%}.egg-3{left:31%;top:82%}.egg-4{left:69%;top:31%}.egg-5{left:11%;top:49%}
+.funny-popup{position:fixed;right:26px;top:82px;z-index:5000;width:min(410px,calc(100vw - 32px));padding:16px;border:1px solid rgba(103,232,249,.28);border-radius:18px;background:rgba(7,12,18,.94);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 40px rgba(103,232,249,.12);backdrop-filter:blur(20px);display:none}.funny-popup.open{display:block;animation:popupIn .28s ease}.funny-top{display:flex;align-items:center;gap:8px;color:#72e8f8;font-size:9px;font-weight:800;letter-spacing:.18em}.funny-top i{width:6px;height:6px;border-radius:50%;background:#67e8f9;box-shadow:0 0 12px #67e8f9}.funny-close{margin-left:auto;border:0;background:transparent;color:#7d8b91;font-size:20px;cursor:pointer;line-height:1}.funny-message{margin-top:12px;font-size:17px;line-height:1.3;font-weight:750;color:#f5f5f5}.funny-sub{margin-top:10px;color:#708087;font-size:9px;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}.funny-meta{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);color:#53656c;font-size:9px;letter-spacing:.11em;text-transform:uppercase}@keyframes pinPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}@keyframes popupIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
 @media(max-width:900px){.topnav{gap:18px}.hero{min-height:auto;padding-top:78px}.hero-orb{width:min(78vw,520px)}.carousel{padding-left:18px}.card{flex-basis:min(390px,82vw);height:520px}.feature-strip{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.brandmark{left:14px}.topnav{padding-left:130px;padding-right:10px}.hero h1{font-size:54px}.hero p{font-size:15px}.hero-orb{margin-top:50px}.card{height:500px;border-radius:22px}.card-copy{padding:24px}.card h3{font-size:29px}.carousel{gap:14px}.feature-strip{grid-template-columns:1fr;padding-top:55px}.frame-wrap{padding:0 10px}.frame-wrap iframe{min-height:720px;height:82vh;border-radius:20px}.latest-head,.dash-head{padding-left:16px;padding-right:16px}.globe-pin{left:57%;top:35%;width:16px;height:16px}.globe-pin-label{left:57%;top:35%;font-size:7px}.globe-brand{font-size:8px;bottom:6%;letter-spacing:.14em}.funny-popup{left:16px;right:16px;top:auto;bottom:18px;width:auto}}
+@media(max-width:560px){.brandmark{left:14px}.topnav{padding-left:130px;padding-right:10px}.hero h1{font-size:54px}.hero p{font-size:15px}.hero-orb{margin-top:50px}.card{height:500px;border-radius:22px}.card-copy{padding:24px}.card h3{font-size:29px}.carousel{gap:14px}.feature-strip{grid-template-columns:1fr;padding-top:55px}.frame-wrap{padding:0 10px}.frame-wrap iframe{min-height:720px;height:82vh;border-radius:20px}.latest-head,.dash-head{padding-left:16px;padding-right:16px}.globe-pin{left:57%;top:35%;width:16px;height:16px}.globe-pin-label{left:57%;top:35%;font-size:7px}.globe-brand{font-size:8px;bottom:6%;letter-spacing:.14em}.funny-popup{left:16px;right:16px;top:auto;bottom:18px;width:auto}.egg-dot{width:8px;height:8px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div id="progress"></div>
 <header class="topbar">
-  <div class="brandmark"><i></i>EARTHPULSE</div>
+  <div class="brandmark" id="brandmark" title="There may be more here."><i></i>EARTHPULSE</div>
   <nav class="topnav" aria-label="Primary">
     <a href="/" aria-current="page">Home</a>
     <a href="/planet-pulse.html" class="nav-highlight">Planet Pulse</a>
@@ -44,55 +46,172 @@
 </header>
 <section class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">GLOBAL INTELLIGENCE / SYSTEM ONLINE</div>
-    <h1>See the planet as a system.</h1>
+    <div class="eyebrow" id="eyebrow" title="Try clicking this a few times.">GLOBAL INTELLIGENCE / SYSTEM ONLINE</div>
+    <h1 id="heroTitle" title="This title is hiding something.">See the planet as a system.</h1>
     <p>Earth intelligence for climate, weather, seismic activity, atmosphere, oceans and space weather — designed as one coherent experience.</p>
     <div class="actions"><button class="btn primary" id="explore">Explore Earth</button><button class="btn" id="planet">Launch Planet Pulse</button></div>
-    <div class="hero-orb" aria-label="Interactive Earth globe">
+    <div class="hero-orb" id="heroOrb" aria-label="Interactive Earth globe">
       <button class="globe-pin" id="globePin" aria-label="Open EarthPulse easter egg"></button>
       <div class="globe-pin-label" id="globePinLabel">SECRET EARTH SIGNAL</div>
       <div class="globe-brand">MADE BY PRATYUSH &amp; CO.</div>
+      <button class="egg-dot egg-1" data-egg="orbital ping" aria-label="Hidden signal"></button>
+      <button class="egg-dot egg-2" data-egg="lost satellite" aria-label="Hidden signal"></button>
+      <button class="egg-dot egg-3" data-egg="quark protocol" aria-label="Hidden signal"></button>
+      <button class="egg-dot egg-4" data-egg="moon report" aria-label="Hidden signal"></button>
+      <button class="egg-dot egg-5" data-egg="earth memory" aria-label="Hidden signal"></button>
     </div>
   </div>
 </section>
 <div class="funny-popup" id="funnyPopup" role="dialog" aria-live="polite" aria-label="EarthPulse secret signal">
   <div class="funny-top"><i></i>EARTHPULSE / SECRET SIGNAL<button class="funny-close" id="funnyClose" aria-label="Close">×</button></div>
   <div class="funny-message" id="funnyMessage"></div>
-  <div class="funny-sub">AN OFFICIAL-ISH MESSAGE FROM PLANET EARTH. PROBABLY.</div>
+  <div class="funny-sub" id="funnySub">AN OFFICIAL-ISH MESSAGE FROM PLANET EARTH. PROBABLY.</div>
+  <div class="funny-meta" id="funnyMeta">SIGNAL 01 · CLASSIFIED BY NO ONE</div>
 </div>
 <section class="latest" id="latest">
-  <div class="latest-head"><h2>The latest. Explore what's new.</h2><p>New ways to observe, explore and interact with the planet.</p></div>
+  <div class="latest-head"><h2 id="latestTitle" title="Triple-click me.">The latest. Explore what's new.</h2><p>New ways to observe, explore and interact with the planet.</p></div>
   <div class="carousel" id="carousel">
-    <article class="card card-blue"><div class="card-copy"><div class="card-kicker">NEW / PLANET PULSE</div><h3>See Earth<br>in motion.</h3><p>A dedicated 3D planet view with event radar, mission mode and Live Earth.</p></div><div class="card-art"><div class="visual-globe"></div></div><div class="card-footer"><span>Interactive 3D Earth</span><span class="arrow">↗</span></div></article>
-    <article class="card card-light"><div class="card-copy"><div class="card-kicker">EARTH INTELLIGENCE</div><h3>One planet.<br>Many signals.</h3><p>Climate, seismic, weather, air quality, oceans and solar activity in one workspace.</p></div><div class="card-art"><div class="visual-lines"></div><div class="visual-ai"><strong>EARTH INTELLIGENCE</strong><span>OBSERVED · MODELED · INFERRED · DEMO</span></div></div><div class="card-footer"><span>Scientific workspace</span><span class="arrow">↗</span></div></article>
-    <article class="card card-purple"><div class="card-copy"><div class="card-kicker">MISSION MODE</div><h3>Find the<br>signal.</h3><p>Rotate the globe, locate a highlighted hotspot and complete exploration missions.</p></div><div class="card-art"><div class="visual-radar"></div><div class="visual-target"></div></div><div class="card-footer"><span>Target hunting · XP</span><span class="arrow">↗</span></div></article>
-    <article class="card card-green"><div class="card-copy"><div class="card-kicker">EARTHPULSE AI</div><h3>Ask the<br>planet.</h3><p>Ask questions about the current Earth context and get explanations tied to what you are viewing.</p></div><div class="card-art"><div class="visual-ai"><strong>Ask EarthPulse</strong><span>“What is happening on Earth?”</span><br><span>“Explain this event.”</span></div></div><div class="card-footer"><span>Context-aware intelligence</span><span class="arrow">↗</span></div></article>
-    <article class="card card-dark"><div class="card-copy"><div class="card-kicker">LIVE EARTH</div><h3>Watch the<br>world breathe.</h3><p>A cinematic mode where the planet becomes the interface.</p></div><div class="card-art"><div class="visual-globe" style="background:radial-gradient(circle at 38% 30%,#d8f7ff 0,#3ab5da 18%,#0d4561 55%,#020c14 82%);filter:saturate(.8)"></div></div><div class="card-footer"><span>Immersive mode</span><span class="arrow">↗</span></div></article>
+    <article class="card card-blue"><div class="card-copy"><div class="card-kicker" data-egg="blue signal">NEW / PLANET PULSE</div><h3>See Earth<br>in motion.</h3><p>A dedicated 3D planet view with event radar, mission mode and Live Earth.</p></div><div class="card-art"><div class="visual-globe"></div></div><div class="card-footer"><span>Interactive 3D Earth</span><span class="arrow">↗</span></div></article>
+    <article class="card card-light"><div class="card-copy"><div class="card-kicker" data-egg="one planet protocol">EARTH INTELLIGENCE</div><h3>One planet.<br>Many signals.</h3><p>Climate, seismic, weather, air quality, oceans and solar activity in one workspace.</p></div><div class="card-art"><div class="visual-lines"></div><div class="visual-ai"><strong>EARTH INTELLIGENCE</strong><span>OBSERVED · MODELED · INFERRED · DEMO</span></div></div><div class="card-footer"><span>Scientific workspace</span><span class="arrow">↗</span></div></article>
+    <article class="card card-purple"><div class="card-copy"><div class="card-kicker" data-egg="mission 07">MISSION MODE</div><h3>Find the<br>signal.</h3><p>Rotate the globe, locate a highlighted hotspot and complete exploration missions.</p></div><div class="card-art"><div class="visual-radar"></div><div class="visual-target"></div></div><div class="card-footer"><span>Target hunting · XP</span><span class="arrow">↗</span></div></article>
+    <article class="card card-green"><div class="card-copy"><div class="card-kicker" data-egg="green protocol">EARTHPULSE AI</div><h3>Ask the<br>planet.</h3><p>Ask questions about the current Earth context and get explanations tied to what you are viewing.</p></div><div class="card-art"><div class="visual-ai"><strong>Ask EarthPulse</strong><span>“What is happening on Earth?”</span><br><span>“Explain this event.”</span></div></div><div class="card-footer"><span>Context-aware intelligence</span><span class="arrow">↗</span></div></article>
+    <article class="card card-dark"><div class="card-copy"><div class="card-kicker" data-egg="live earth whisper">LIVE EARTH</div><h3>Watch the<br>world breathe.</h3><p>A cinematic mode where the planet becomes the interface.</p></div><div class="card-art"><div class="visual-globe" style="background:radial-gradient(circle at 38% 30%,#d8f7ff 0,#3ab5da 18%,#0d4561 55%,#020c14 82%);filter:saturate(.8)"></div></div><div class="card-footer"><span>Immersive mode</span><span class="arrow">↗</span></div></article>
   </div>
 </section>
 <section class="dashboard" id="dashboard">
-  <div class="dash-head"><h2>Earth intelligence, fully connected.</h2><p>The existing EarthPulse analytics workspace stays intact below the new product layer, preserving weather, earthquakes, climate, solar, air quality, alerts, sources and AI integrations.</p></div>
+  <div class="dash-head"><h2 id="dashTitle" title="Five clicks. Try it.">Earth intelligence, fully connected.</h2><p>The existing EarthPulse analytics workspace stays intact below the new product layer, preserving weather, earthquakes, climate, solar, air quality, alerts, sources and AI integrations.</p></div>
   <div class="frame-wrap"><iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse analytics dashboard"></iframe></div>
   <div class="feature-strip">
-    <div class="feature"><small>Interactive</small><h4>Planet Pulse</h4><p>3D Earth, event radar, focus, zoom, auto-rotation and mission exploration.</p></div>
-    <div class="feature"><small>Scientific</small><h4>Earth Intelligence</h4><p>Keep observations visually separate from modeled, inferred or demo information.</p></div>
-    <div class="feature"><small>Responsive</small><h4>Designed for every screen</h4><p>Horizontal product cards on desktop, touch-friendly snapping on mobile.</p></div>
-    <div class="feature"><small>AI</small><h4>Ask EarthPulse</h4><p>Use the integrated EarthPulse AI layer to understand the data in context.</p></div>
+    <div class="feature" data-feature-secret="observed"><small>Interactive</small><h4>Planet Pulse</h4><p>3D Earth, event radar, focus, zoom, auto-rotation and mission exploration.</p></div>
+    <div class="feature" data-feature-secret="inferred"><small>Scientific</small><h4>Earth Intelligence</h4><p>Keep observations visually separate from modeled, inferred or demo information.</p></div>
+    <div class="feature" data-feature-secret="mobile"><small>Responsive</small><h4>Designed for every screen</h4><p>Horizontal product cards on desktop, touch-friendly snapping on mobile.</p></div>
+    <div class="feature" data-feature-secret="ai"><small>AI</small><h4>Ask EarthPulse</h4><p>Use the integrated EarthPulse AI layer to understand the data in context.</p></div>
   </div>
 </section>
-<footer class="footer">EARTHPULSE · SEE THE PLANET AS A SYSTEM. · <a href="/whats-new.html">WHAT'S NEW</a> · <a href="/license.html">LICENSE</a></footer>
+<footer class="footer"><span id="footerText">EARTHPULSE · SEE THE PLANET AS A SYSTEM.</span> · <a href="/whats-new.html">WHAT'S NEW</a> · <a href="/license.html">LICENSE</a><span class="footer-secret" id="footerSecret">· 13</span></footer>
 <script src="/globe-enhancer.js"></script>
 <script>
 const frame=document.getElementById('earthpulse-frame');
 function openPulse(){window.location.href='/planet-pulse.html'}
 document.getElementById('planet').onclick=openPulse;
 document.getElementById('explore').onclick=()=>document.getElementById('latest').scrollIntoView({behavior:'smooth'});
-const funnyMessages=['Bro, Earth called. It says stop spinning the globe.','Breaking news: Earth is still mostly round. Scientists remain impressed.','You found the secret point. Please act like this was intentional.','Planet status: rotating. Human status: probably procrastinating.','EarthPulse detected one extremely important signal: you clicked the tiny dot.','Congratulations. You have officially bothered a planet.','No aliens here. Probably. Check Planet Pulse anyway.','Climate data loading… snacks are not included in the API.','The globe knows what you did. It has excellent long-term memory.','NASA did not send this message. Pratyush probably did.','Gravity is working normally. Please continue pretending this is science.','Earth says: nice click. Now go explore something actually scientific.'];
-const funnyPopup=document.getElementById('funnyPopup');const funnyMessage=document.getElementById('funnyMessage');const globePin=document.getElementById('globePin');
-function showFunny(){funnyMessage.textContent=funnyMessages[Math.floor(Math.random()*funnyMessages.length)];funnyPopup.classList.add('open')}
-globePin.addEventListener('click',showFunny);document.getElementById('funnyClose').addEventListener('click',()=>funnyPopup.classList.remove('open'));document.addEventListener('keydown',e=>{if(e.key==='Escape')funnyPopup.classList.remove('open')});
-frame.addEventListener('load',()=>{try{const d=frame.contentDocument;d.documentElement.style.height='100%';d.body.style.minHeight='100vh';d.body.style.overflow='auto';const m=d.querySelector('.earthpulse-main');if(m){m.style.overflowY='auto';m.style.overflowX='hidden'}d.querySelectorAll('amp-auto-ads').forEach(e=>e.remove());d.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(e=>e.remove());d.querySelectorAll('canvas').forEach(c=>c.style.touchAction='none')}catch(_){}});
-window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(max>0?(scrollY/max)*100:0)+'%'},{passive:true});
+const signals=[
+  ['Bro, Earth called. It says stop spinning the globe.','SIGNAL 01 · ROTATION CONTROL'],
+  ['Breaking news: Earth is still mostly round. Scientists remain impressed.','SIGNAL 02 · GEOMETRY CONFIRMED'],
+  ['You found the secret point. Please act like this was intentional.','SIGNAL 03 · POINT DISCOVERED'],
+  ['Planet status: rotating. Human status: probably procrastinating.','SIGNAL 04 · HUMAN ANALYSIS'],
+  ['EarthPulse detected one extremely important signal: you clicked the tiny dot.','SIGNAL 05 · PRIORITY: LOW'],
+  ['Congratulations. You have officially bothered a planet.','SIGNAL 06 · PLANET DISTURBED'],
+  ['No aliens here. Probably. Check Planet Pulse anyway.','SIGNAL 07 · DEEP SPACE NOTE'],
+  ['Climate data loading… snacks are not included in the API.','SIGNAL 08 · SNACKS: OFFLINE'],
+  ['The globe knows what you did. It has excellent long-term memory.','SIGNAL 09 · EARTH MEMORY'],
+  ['NASA did not send this message. Pratyush probably did.','SIGNAL 10 · SOURCE: SUSPICIOUS'],
+  ['Gravity is working normally. Please continue pretending this is science.','SIGNAL 11 · GRAVITY NOMINAL'],
+  ['Earth says: nice click. Now go explore something actually scientific.','SIGNAL 12 · RETURN TO SCIENCE'],
+  ['Hidden systems unlocked: absolutely nothing useful. Excellent.','SIGNAL 13 · USELESS BUT IMPORTANT'],
+  ['Quark detected. It appears to be doing physics instead of homework.','SIGNAL 14 · QUARK PROTOCOL'],
+  ['Telemetry note: somebody has been clicking suspiciously hard.','SIGNAL 15 · HUMAN ACTIVITY'],
+  ['Temporal anomaly: this easter egg has no right to be this hidden.','SIGNAL 16 · TIME MACHINE'],
+  ['EarthPulse command: observe first, panic never.','SIGNAL 17 · COMMAND SAFE'],
+  ['A tiny developer probably hid this. A larger developer definitely approved it.','SIGNAL 18 · BUILD LOG']
+];
+const funnyPopup=document.getElementById('funnyPopup');
+const funnyMessage=document.getElementById('funnyMessage');
+const funnyMeta=document.getElementById('funnyMeta');
+function showFunny(message,meta){
+  const item=message?null:signals[Math.floor(Math.random()*signals.length)];
+  funnyMessage.textContent=message||item[0];
+  funnyMeta.textContent=meta||item[1];
+  funnyPopup.classList.add('open');
+}
+document.getElementById('globePin').addEventListener('click',()=>showFunny());
+document.querySelectorAll('.egg-dot').forEach(dot=>dot.addEventListener('click',e=>{e.stopPropagation();showFunny('Secret '+dot.dataset.egg+' located. You are officially looking in places most visitors ignore.','HIDDEN NODE · '+dot.dataset.egg.toUpperCase())}));
+document.getElementById('funnyClose').addEventListener('click',()=>funnyPopup.classList.remove('open'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')funnyPopup.classList.remove('open')});
+
+let brandClicks=0,brandTimer;
+document.getElementById('brandmark').addEventListener('click',()=>{
+  brandClicks++;
+  clearTimeout(brandTimer);
+  brandTimer=setTimeout(()=>brandClicks=0,1400);
+  if(brandClicks>=5){brandClicks=0;showFunny('You clicked EARTHPULSE five times. The brand is now legally aware of you.','BRAND HANDSHAKE · ACCESS GRANTED')}
+});
+
+let eyebrowClicks=0,eyebrowTimer;
+document.getElementById('eyebrow').addEventListener('click',()=>{
+  eyebrowClicks++;
+  clearTimeout(eyebrowTimer);
+  eyebrowTimer=setTimeout(()=>eyebrowClicks=0,1200);
+  if(eyebrowClicks>=4){eyebrowClicks=0;showFunny('SYSTEM ONLINE. SYSTEM SECRET. SYSTEM HAS A SENSE OF HUMOR.','SYSTEM CHECK · ALL GREEN')}
+});
+
+let titleClicks=0,titleTimer;
+document.getElementById('heroTitle').addEventListener('dblclick',()=>showFunny('You double-clicked a sentence. Somehow, that worked.','TITLE EVENT · HUMAN CURIOSITY'));
+document.getElementById('latestTitle').addEventListener('click',()=>{
+  titleClicks++;clearTimeout(titleTimer);titleTimer=setTimeout(()=>titleClicks=0,900);
+  if(titleClicks>=3){titleClicks=0;showFunny('Three clicks on the latest section. No data was harmed.','LATEST NODE · TRIPLE CLICK')}
+});
+
+document.querySelectorAll('.card-kicker').forEach(k=>{
+  let c=0,t;
+  k.addEventListener('click',()=>{c++;clearTimeout(t);t=setTimeout(()=>c=0,900);if(c>=2){c=0;showFunny('You found a card-level signal: '+k.dataset.egg+'.','CARD EASTER EGG · '+k.textContent.trim())}});
+});
+
+document.querySelectorAll('.feature').forEach(f=>f.addEventListener('click',()=>showFunny('Feature inspected: '+f.dataset.featureSecret+'. That was unnecessarily thorough.','FEATURE AUDIT · '+f.dataset.featureSecret.toUpperCase())));
+
+let dashClicks=0,dashTimer;
+document.getElementById('dashTitle').addEventListener('click',()=>{
+  dashClicks++;clearTimeout(dashTimer);dashTimer=setTimeout(()=>dashClicks=0,1100);
+  if(dashClicks>=5){dashClicks=0;showFunny('Analytics says: yes, there is data. No, it will not explain your homework.','ANALYTICS NODE · 5 CLICKS')}
+});
+
+let footerClicks=0,footerTimer;
+document.getElementById('footerSecret').addEventListener('click',()=>{
+  footerClicks++;clearTimeout(footerTimer);footerTimer=setTimeout(()=>footerClicks=0,1300);
+  if(footerClicks>=3){footerClicks=0;showFunny('You found the suspiciously hidden footer number. Respect.','FOOTER NODE · 13')}
+});
+
+document.getElementById('progress').addEventListener('click',()=>showFunny('You clicked the scroll progress bar. This is the most committed kind of exploration.','NAVIGATION NODE · PROGRESS'));
+
+let holdTimer;
+const primary=document.getElementById('explore');
+primary.addEventListener('pointerdown',()=>{holdTimer=setTimeout(()=>showFunny('You held Explore Earth long enough to unlock a non-existent orbital mode.','LONG PRESS · ORBITAL MODE'),1400)});
+['pointerup','pointerleave','pointercancel'].forEach(ev=>primary.addEventListener(ev,()=>clearTimeout(holdTimer)));
+
+const keySecret='earth';let keyBuffer='';let keyStamp=0;
+document.addEventListener('keydown',e=>{
+  if(e.key.length!==1)return;
+  const now=Date.now();
+  keyBuffer=now-keyStamp>1200?e.key.toLowerCase():keyBuffer+e.key.toLowerCase();
+  keyStamp=now;
+  if(keyBuffer.endsWith(keySecret)){keyBuffer='';showFunny('Keyword accepted. You typed EARTH. The planet remains unchanged.','KEYBOARD NODE · EARTH')}
+});
+
+let scrollSecret=false;
+window.addEventListener('scroll',()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('progress').style.width=(max>0?(scrollY/max)*100:0)+'%';
+  if(!scrollSecret&&max>0&&scrollY/max>.91){scrollSecret=true;setTimeout(()=>showFunny('You made it to the bottom. Most people do not. EarthPulse salutes your scrolling endurance.','DEEP SCROLL · BOTTOM OF PLANET'),350)}
+},{passive:true});
+
+let frameEggTriggered=false;
+frame.addEventListener('load',()=>{
+  try{
+    const d=frame.contentDocument;
+    d.documentElement.style.height='100%';
+    d.body.style.minHeight='100vh';
+    d.body.style.overflow='auto';
+    const m=d.querySelector('.earthpulse-main');
+    if(m){m.style.overflowY='auto';m.style.overflowX='hidden'}
+    d.querySelectorAll('amp-auto-ads').forEach(e=>e.remove());
+    d.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(e=>e.remove());
+    d.querySelectorAll('canvas').forEach(c=>c.style.touchAction='none');
+    if(!frameEggTriggered){
+      frameEggTriggered=true;
+      d.addEventListener('keydown',ev=>{if(ev.key.toLowerCase()==='x')showFunny('You pressed X inside the dashboard. There is no secret mode. Probably.','IFRAME NODE · X');});
+    }
+  }catch(_){}
+});
 </script>
 </body>
 </html>
