@@ -5,7 +5,7 @@
     }
   },
   "rewrites": [
-    { "source": "/", "destination": "/premium-home.html" }
+    { "source": "/", "destination": "/home-globe-overlay.html" }
   ],
   "headers": [
     {
