@@ -3,5 +3,8 @@
     "api/earthpulse-ai.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/premium-home.html" }
+  ]
 }
