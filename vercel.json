@@ -9,6 +9,12 @@
   ],
   "headers": [
     {
+      "source": "/google1b7bff499570ee71.html",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
+    },
+    {
       "source": "/index.html",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, follow" }
