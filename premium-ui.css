@@ -1,0 +1,131 @@
+:root {
+  color-scheme: dark;
+  --ep-bg: #030711;
+  --ep-panel: rgba(8, 15, 28, .86);
+  --ep-panel-strong: rgba(10, 19, 34, .96);
+  --ep-line: rgba(148, 163, 184, .13);
+  --ep-line-bright: rgba(56, 189, 248, .30);
+  --ep-cyan: #67e8f9;
+  --ep-blue: #60a5fa;
+  --ep-text: #e5eefb;
+  --ep-muted: #8190a6;
+}
+
+* { scrollbar-width: thin; scrollbar-color: rgba(71, 85, 105, .8) transparent; }
+*::-webkit-scrollbar { width: 7px; height: 7px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(71, 85, 105, .72); border-radius: 999px; }
+
+html, body { background: radial-gradient(circle at 70% -10%, #0b1c32 0, var(--ep-bg) 42%, #02050b 100%) !important; }
+body { color: var(--ep-text) !important; }
+
+/* Mission-control shell */
+header {
+  height: 72px !important;
+  background: rgba(3, 7, 17, .82) !important;
+  border-color: var(--ep-line) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.22), inset 0 -1px rgba(103,232,249,.04);
+}
+header:after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,.42), transparent);
+  pointer-events: none;
+}
+
+aside {
+  background: rgba(4, 10, 20, .92) !important;
+  border-color: var(--ep-line) !important;
+  box-shadow: 16px 0 40px rgba(0,0,0,.16);
+}
+
+main {
+  background:
+    radial-gradient(circle at 55% 0%, rgba(14, 116, 144, .07), transparent 28%),
+    linear-gradient(180deg, #030711 0%, #02050b 100%) !important;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Upgrade existing cards without touching their React/data logic */
+main .bg-slate-900\/60,
+main .bg-slate-900\/80,
+main .bg-slate-950\/40 {
+  background: linear-gradient(145deg, rgba(12, 22, 39, .90), rgba(5, 11, 21, .82)) !important;
+  border-color: var(--ep-line) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.025);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+main .bg-slate-900\/60:hover,
+main .bg-slate-900\/80:hover {
+  border-color: rgba(56,189,248,.24) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.24), 0 0 0 1px rgba(56,189,248,.035) inset;
+}
+
+/* KPI typography */
+main .text-2xl.font-mono.font-bold { letter-spacing: -.035em; text-shadow: 0 0 24px currentColor; }
+
+/* Globe: give it a real command-center stage and more breathing room */
+main canvas,
+main canvas + * { image-rendering: auto; }
+main .min-h-\[380px\] {
+  min-height: clamp(420px, 58vh, 700px) !important;
+  border-radius: 22px !important;
+  border-color: rgba(56,189,248,.18) !important;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(14,116,144,.11), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(2,6,23,.25), #02050b 70%) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.35), inset 0 0 80px rgba(56,189,248,.025) !important;
+}
+
+/* Better navigation states */
+aside nav button {
+  min-height: 43px;
+  border: 1px solid transparent;
+}
+aside nav button:hover { transform: translateX(2px); }
+aside nav button.bg-cyan-500\/15 {
+  background: linear-gradient(90deg, rgba(8,145,178,.18), rgba(14,116,144,.06)) !important;
+  border-color: rgba(103,232,249,.22) !important;
+  box-shadow: inset 3px 0 var(--ep-cyan), 0 8px 25px rgba(8,145,178,.08) !important;
+}
+
+/* Inputs / controls */
+input, select {
+  background-color: rgba(2, 6, 15, .78) !important;
+  border-color: rgba(71,85,105,.55) !important;
+}
+input:focus, select:focus {
+  border-color: rgba(103,232,249,.55) !important;
+  box-shadow: 0 0 0 3px rgba(34,211,238,.08), 0 0 28px rgba(34,211,238,.06);
+}
+button { transition: transform .16s ease, background-color .16s ease, border-color .16s ease, box-shadow .16s ease; }
+button:active { transform: scale(.98); }
+
+/* Data-status pills */
+.font-mono .bg-slate-950\/60 { box-shadow: inset 0 1px rgba(255,255,255,.025); }
+
+/* Make the application genuinely scrollable on every viewport */
+body, #root { min-height: 100vh !important; }
+#root > div { min-height: 100vh !important; }
+
+@media (max-width: 1024px) {
+  header { height: 64px !important; }
+  main { padding: 18px !important; }
+  main .min-h-\[380px\] { min-height: 460px !important; }
+}
+
+@media (max-width: 640px) {
+  body { overflow: auto !important; }
+  header { position: sticky !important; top: 0; }
+  main { padding: 12px !important; }
+  main .min-h-\[380px\] { min-height: 390px !important; border-radius: 17px !important; }
+  main .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: 1fr !important; }
+  main .text-2xl.font-mono.font-bold { font-size: 1.35rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
