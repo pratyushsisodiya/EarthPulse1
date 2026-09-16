@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  // Preserve the existing interactive Planet Pulse overlay.
   if (!window.__EARTHPULSE_CORE_LOADED__) {
     window.__EARTHPULSE_CORE_LOADED__ = true;
     const core = document.createElement('script');
@@ -10,8 +9,10 @@
     document.head.appendChild(core);
   }
 
+  // The original dashboard is the canonical Command Center route.
+  // Bypass the legacy redirect wrapper so launch actions cannot get stranded.
   const launchOriginalDashboard = () => {
-    window.location.href = '/index.html.html';
+    window.location.assign('/command-center.html');
   };
 
   const showPopup = (text) => {
@@ -137,7 +138,7 @@
       ['.card-blue', '/planet-pulse.html'],
       ['.card-light', '/data.html'],
       ['.card-purple', '/mission.html'],
-      ['.card-green', '/index.html.html'],
+      ['.card-green', '/command-center.html'],
       ['.card-dark', '/planet-pulse.html']
     ];
     links.forEach(([selector, href]) => {
