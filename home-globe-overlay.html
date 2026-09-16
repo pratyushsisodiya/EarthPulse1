@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>EarthPulse — Planetary Intelligence Command Center</title>
 <style>
 html,body{margin:0;width:100%;height:100%;background:#03060b;overflow:hidden}
@@ -59,8 +58,18 @@ function locate(){
   brand.style.left=(fr.left+fr.width/2)+'px';brand.style.top=(fr.bottom-48)+'px';
  }catch(e){}
 }
+function injectCursorGlow(){
+ try{
+  const doc=iframe.contentDocument||iframe.contentWindow.document;
+  if(!doc || doc.getElementById('earthpulse-cursor-glow')) return;
+  const script=doc.createElement('script');
+  script.src='/cursor-glow.js';
+  script.defer=true;
+  doc.head.appendChild(script);
+ }catch(e){}
+}
 function show(){message.textContent=messages[Math.floor(Math.random()*messages.length)];popup.classList.add('open')}
-iframe.addEventListener('load',()=>{locate();setTimeout(locate,250);setTimeout(locate,1000)});
+iframe.addEventListener('load',()=>{injectCursorGlow();locate();setTimeout(injectCursorGlow,250);setTimeout(locate,250);setTimeout(injectCursorGlow,1000);setTimeout(locate,1000)});
 egg.addEventListener('click',show);document.getElementById('close').addEventListener('click',()=>popup.classList.remove('open'));document.addEventListener('keydown',e=>{if(e.key==='Escape')popup.classList.remove('open')});
 window.addEventListener('resize',locate);window.addEventListener('scroll',locate,{passive:true});setInterval(locate,500);
 })();
