@@ -63,6 +63,17 @@ function bindCursor(){
  const frame=()=>{currentX+=(targetX-currentX)*.13;currentY+=(targetY-currentY)*.13;glow.style.transform=`translate3d(${currentX}px,${currentY}px,0)`;requestAnimationFrame(frame)};
  frame();
 }
+function injectIframeCursor(){
+ try{
+  const doc=iframe.contentDocument||iframe.contentWindow.document;
+  if(!doc||doc.getElementById('earthpulse-embedded-cursor-loader'))return;
+  const script=doc.createElement('script');
+  script.id='earthpulse-embedded-cursor-loader';
+  script.src='/cursor-glow.js';
+  script.async=false;
+  (doc.body||doc.documentElement).appendChild(script);
+ }catch(e){}
+}
 function locate(){
  try{
   const doc=iframe.contentDocument||iframe.contentWindow.document;
@@ -79,7 +90,7 @@ function locate(){
  }catch(e){}
 }
 function show(){message.textContent=messages[Math.floor(Math.random()*messages.length)];popup.classList.add('open')}
-iframe.addEventListener('load',()=>{locate();bindCursor();setTimeout(locate,250);setTimeout(locate,1000)});
+iframe.addEventListener('load',()=>{injectIframeCursor();locate();bindCursor();setTimeout(injectIframeCursor,250);setTimeout(locate,250);setTimeout(locate,1000)});
 bindCursor();
 egg.addEventListener('click',show);document.getElementById('close').addEventListener('click',()=>popup.classList.remove('open'));document.addEventListener('keydown',e=>{if(e.key==='Escape')popup.classList.remove('open')});
 window.addEventListener('resize',locate);window.addEventListener('scroll',locate,{passive:true});setInterval(locate,500);
