@@ -132,6 +132,33 @@
     planet.insertAdjacentElement('afterend', btn);
   };
 
+  const addFeatureLinks = () => {
+    const links = [
+      ['.card-blue', '/planet-pulse.html'],
+      ['.card-light', '/data.html'],
+      ['.card-purple', '/mission.html'],
+      ['.card-green', '/index.html.html'],
+      ['.card-dark', '/planet-pulse.html']
+    ];
+    links.forEach(([selector, href]) => {
+      const card = document.querySelector(selector);
+      if (!card || card.dataset.epLinked === '1') return;
+      card.dataset.epLinked = '1';
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('click', (event) => {
+        if (event.target.closest('button,a,input,select,textarea')) return;
+        window.location.href = href;
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          window.location.href = href;
+        }
+      });
+    });
+  };
+
   const addLaunchpad = () => {
     if (document.querySelector('.ep-launchpad')) return;
     const latest = document.getElementById('latest');
@@ -175,6 +202,7 @@
     removeAutoDashboard();
     addFocusEggs();
     addTopDashboardButton();
+    addFeatureLinks();
     addLaunchpad();
     const explore = document.getElementById('explore');
     if (explore) explore.onclick = () => document.getElementById('latest')?.scrollIntoView({behavior:'smooth'});
