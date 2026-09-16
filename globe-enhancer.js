@@ -10,12 +10,18 @@
     document.head.appendChild(core);
   }
 
+  const launchOriginalDashboard = () => {
+    window.location.href = '/index.html.html';
+  };
+
   const showPopup = (text) => {
     const message = document.getElementById('funnyMessage');
     const popup = document.getElementById('funnyPopup');
     if (message && popup) {
       message.textContent = text;
       popup.classList.add('open');
+      const launch = document.getElementById('ep-popup-dashboard');
+      if (launch) launch.focus({preventScroll:true});
     }
   };
 
@@ -40,10 +46,28 @@
       .ep-og-badge{display:inline-flex;align-items:center;gap:6px;margin-top:11px;padding:5px 8px;border-radius:999px;background:rgba(134,239,172,.07);border:1px solid rgba(134,239,172,.18);color:#86efac;font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
       .ep-og-badge i{width:5px;height:5px;border-radius:50%;background:#86efac;box-shadow:0 0 10px #86efac}
       .ep-launcher-btn{border-color:rgba(103,232,249,.34)!important;box-shadow:0 0 30px rgba(103,232,249,.08)}
+      .ep-dashboard-top-btn{background:linear-gradient(145deg,#0d2530,#091218)!important;border-color:rgba(103,232,249,.35)!important;color:#a5f3fc!important;box-shadow:0 0 28px rgba(103,232,249,.10)}
+      .ep-popup-dashboard{margin-top:14px;width:100%;border:1px solid rgba(103,232,249,.28);background:linear-gradient(145deg,rgba(8,145,178,.16),rgba(15,23,42,.88));color:#bff7ff;border-radius:12px;padding:10px 12px;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s}
+      .ep-popup-dashboard:hover{border-color:rgba(103,232,249,.55);transform:translateY(-1px);color:#fff}
       @media(max-width:900px){.ep-launch-grid{grid-template-columns:repeat(2,1fr)}}
-      @media(max-width:560px){.ep-launchpad{padding:20px 16px 65px}.ep-launch-grid{grid-template-columns:1fr}.ep-launch-card{min-height:120px}.ep-launch-head{display:block}}
+      @media(max-width:560px){.ep-launchpad{padding:20px 16px 65px}.ep-launch-grid{grid-template-columns:1fr}.ep-launch-card{min-height:120px}.ep-launch-head{display:block}.ep-popup-dashboard{font-size:9px}}
     `;
     document.head.appendChild(style);
+  };
+
+  const addPopupDashboardButton = () => {
+    const popup = document.getElementById('funnyPopup');
+    if (!popup || document.getElementById('ep-popup-dashboard')) return;
+    const btn = document.createElement('button');
+    btn.id = 'ep-popup-dashboard';
+    btn.className = 'ep-popup-dashboard';
+    btn.type = 'button';
+    btn.textContent = 'OPEN ORIGINAL DASHBOARD →';
+    btn.title = 'Launch the original EarthPulse dashboard';
+    btn.addEventListener('click', launchOriginalDashboard);
+    const sub = popup.querySelector('.funny-sub');
+    if (sub) sub.insertAdjacentElement('afterend', btn);
+    else popup.appendChild(btn);
   };
 
   const addFocusEggs = () => {
@@ -73,7 +97,6 @@
     pin.type = 'button';
     pin.setAttribute('aria-label', 'Just focus on the project, bro');
     pin.title = 'Just focus on the project, bro.';
-
     const label = document.createElement('div');
     label.className = 'focus-project-label';
     label.innerHTML = '<span>JUST FOCUS ON THE PROJECT, BRO.</span>';
@@ -84,24 +107,35 @@
     physicsPin.type = 'button';
     physicsPin.setAttribute('aria-label', 'Coulomb constant physics easter egg');
     physicsPin.title = 'k = 8.99 × 10⁹ N·m²/C²';
-
     const physicsLabel = document.createElement('div');
     physicsLabel.className = 'physics-label';
     physicsLabel.innerHTML = '<span>k = 8.99 × 10⁹ N·m²/C²</span>';
     physicsPin.addEventListener('click', () => showPopup('k = 8.99 × 10⁹ N·m²/C² — You should have attended your physics class.'));
 
-    orb.appendChild(pin);orb.appendChild(label);orb.appendChild(physicsPin);orb.appendChild(physicsLabel);
+    orb.appendChild(pin);
+    orb.appendChild(label);
+    orb.appendChild(physicsPin);
+    orb.appendChild(physicsLabel);
   };
 
-  const launchOriginalDashboard = () => {
-    window.location.href = '/index.html.html';
+  const addTopDashboardButton = () => {
+    const actions = document.querySelector('.actions');
+    const planet = document.getElementById('planet');
+    if (!actions || !planet || document.getElementById('ep-top-dashboard')) return;
+    const btn = document.createElement('button');
+    btn.id = 'ep-top-dashboard';
+    btn.className = 'btn ep-dashboard-top-btn';
+    btn.type = 'button';
+    btn.textContent = 'Original Dashboard';
+    btn.title = 'Launch the original EarthPulse dashboard';
+    btn.addEventListener('click', launchOriginalDashboard);
+    planet.insertAdjacentElement('afterend', btn);
   };
 
   const addLaunchpad = () => {
     if (document.querySelector('.ep-launchpad')) return;
     const latest = document.getElementById('latest');
     if (!latest) return;
-
     const wrap = document.createElement('section');
     wrap.className = 'ep-launchpad';
     wrap.innerHTML = `
@@ -114,7 +148,6 @@
         <button class="ep-launch-card" data-href="#latest"><b>EARTH INTELLIGENCE</b><span>Explore the feature cards and new planetary experiences.</span><i>↓</i></button>
         <button class="ep-launch-card" data-href="/mission.html"><b>MISSION</b><span>Open the EarthPulse mission and product story.</span><i>↗</i></button>
       </div>`;
-
     latest.insertAdjacentElement('afterend', wrap);
     document.getElementById('ep-og-launch').addEventListener('click', launchOriginalDashboard);
     wrap.querySelectorAll('[data-href]').forEach(btn => btn.addEventListener('click', () => {
@@ -122,13 +155,12 @@
       if (href.startsWith('#')) document.querySelector(href)?.scrollIntoView({behavior:'smooth'});
       else window.location.href = href;
     }));
-
     document.querySelectorAll('a[href="#dashboard"]').forEach(a => {
       a.removeAttribute('href');
       a.classList.add('ep-launcher-btn');
       a.addEventListener('click', launchOriginalDashboard);
       a.setAttribute('role','button');
-      a.title = 'Launch Original Dashboard';
+      a.setAttribute('title','Launch Original Dashboard');
     });
   };
 
@@ -139,13 +171,13 @@
 
   const init = () => {
     addStyle();
+    addPopupDashboardButton();
     removeAutoDashboard();
     addFocusEggs();
+    addTopDashboardButton();
     addLaunchpad();
-
     const explore = document.getElementById('explore');
     if (explore) explore.onclick = () => document.getElementById('latest')?.scrollIntoView({behavior:'smooth'});
-
     const planet = document.getElementById('planet');
     if (planet) planet.onclick = () => { window.location.href = '/planet-pulse.html'; };
   };
