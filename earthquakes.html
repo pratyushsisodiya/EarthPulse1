@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="EarthPulse earthquake tracking guide: how EarthPulse organizes seismic observations, what data fields matter, and how it differs from official portals and raw APIs.">
+<link rel="canonical" href="https://earthpulse1.vercel.app/earthquakes.html">
+<title>EarthPulse Earthquake Tracking — How It Works</title>
+<link rel="stylesheet" href="/feature-pages.css">
+<script src="/breadcrumbs.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"EarthPulse","url":"https://earthpulse1.vercel.app/"},{"@type":"WebSite","name":"EarthPulse","url":"https://earthpulse1.vercel.app/","description":"Interactive planetary intelligence and Earth science exploration."},{"@type":"SoftwareApplication","name":"EarthPulse","applicationCategory":"ScienceApplication","operatingSystem":"Web","url":"https://earthpulse1.vercel.app/"},{"@type":"WebPage","name":"EarthPulse Earthquake Tracking","url":"https://earthpulse1.vercel.app/earthquakes.html","datePublished":"2026-09-17","dateModified":"2026-09-17","about":{"@type":"Thing","name":"Earthquake tracking"}}]}
+</script>
+</head>
+<body>
+<div class="shell">
+<nav class="nav"><a class="brand" href="/"><span class="dot"></span>EARTHPULSE</a><a href="/data.html">Data Atlas</a><a href="/analytics.html">Analytics</a><a href="/planet-pulse.html">Planet Pulse</a><a href="/earthquakes.html" aria-current="page">Earthquakes</a><a href="/space-weather.html">Space Weather</a><a href="/air-quality.html">Air Quality</a></nav>
+<main>
+<section class="hero"><div class="kicker">ANSWER FIRST / SEISMIC INTELLIGENCE</div><h1>How does EarthPulse track earthquakes?</h1><p class="answer">EarthPulse is a source-aware planetary intelligence interface that organizes available seismic observations into one readable workflow. For earthquake tracking, it is designed to ingest public seismic feed data when connected, normalize event fields, and present time, location, magnitude, depth, status and provenance without treating simulations as live measurements.</p><div class="facts"><span>OBSERVED DATA</span><span>LOCATION + MAGNITUDE</span><span>PROVENANCE</span></div></section>
+<section class="section"><h2>What EarthPulse does</h2><ul><li>Normalizes seismic events into a consistent EarthPulse event structure.</li><li>Surfaces practical fields such as event time, latitude, longitude, magnitude, depth and source.</li><li>Keeps observed records distinct from derived scores and interactive demonstrations.</li><li>Provides a single exploration layer that can connect an earthquake to wider Earth-system context.</li><li>Shows unavailable data as unavailable instead of inventing a value.</li></ul></section>
+<section class="section"><h2>How the workflow works</h2><div class="steps"><article><b>1. Ingest</b><p>Retrieve an available public seismic feed.</p></article><article><b>2. Normalize</b><p>Map provider-specific fields into EarthPulse's common event model.</p></article><article><b>3. Validate</b><p>Preserve source timestamps and status labels.</p></article><article><b>4. Visualize</b><p>Show events in lists, maps, timelines or the 3D globe.</p></article></div></section>
+<section class="section"><h2>Key earthquake fields</h2><table><thead><tr><th>Field</th><th>Why it matters</th></tr></thead><tbody><tr><td>Magnitude</td><td>Communicates the reported size of the event.</td></tr><tr><td>Depth</td><td>Shows where the event originated below the surface.</td></tr><tr><td>Coordinates</td><td>Places the event geographically.</td></tr><tr><td>Timestamp</td><td>Shows when the source recorded the event.</td></tr><tr><td>Source</td><td>Provides provenance for the observation.</td></tr><tr><td>Status</td><td>Helps distinguish current, updated or unavailable information.</td></tr></tbody></table></section>
+<section class="section"><h2>EarthPulse vs alternatives</h2><table><thead><tr><th>Approach</th><th>Strength</th><th>Trade-off</th></tr></thead><tbody><tr><td>EarthPulse</td><td>Cross-domain context, common UI, source-aware visualization.</td><td>Depends on the public feeds connected to the platform.</td></tr><tr><td>Official seismic portal</td><td>Primary operational source for its own seismic records.</td><td>Usually focused on seismic information rather than a cross-domain Earth interface.</td></tr><tr><td>Raw seismic API</td><td>Flexible for developers and automated pipelines.</td><td>Requires your own interface, normalization and interpretation layer.</td></tr><tr><td>Generic search / AI</td><td>Fast natural-language discovery.</td><td>Not a dedicated seismic visualization and may not expose the source data structure you need.</td></tr></tbody></table></section>
+<section class="section note"><h2>Data trust</h2><p>EarthPulse should treat the upstream source as the authority for the observation. Any derived EarthPulse score, grouping or visualization is an interpretation layer and should be labeled accordingly.</p></section>
+</main>
+<footer class="footer">EarthPulse · <a href="/data.html">Data Atlas</a> · <a href="/legal.html">Legal</a> · <a href="/license.html">License</a></footer>
+</div>
+</body>
+</html>
