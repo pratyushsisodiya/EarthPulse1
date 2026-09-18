@@ -1,0 +1,35 @@
+# EarthPulse
+
+> EarthPulse is an environmental intelligence website focused on understanding Earth's changing conditions through data.
+
+## Canonical Website
+https://earthpulse1.vercel.app/
+
+## Public Areas
+- Home: https://earthpulse1.vercel.app/
+- Earth Data: https://earthpulse1.vercel.app/data.html
+- Analytics: https://earthpulse1.vercel.app/analytics.html
+- Planet Pulse: https://earthpulse1.vercel.app/planet-pulse.html
+- Earthquakes: https://earthpulse1.vercel.app/earthquakes.html
+- Space Weather: https://earthpulse1.vercel.app/space-weather.html
+- Air Quality: https://earthpulse1.vercel.app/air-quality.html
+- Mission: https://earthpulse1.vercel.app/mission.html
+- What's New: https://earthpulse1.vercel.app/whats-new.html
+
+## AI / Machine-Readable Resources
+- AI capability manifest: https://earthpulse1.vercel.app/api/earthpulse-ai-info
+- AI test surface: https://earthpulse1.vercel.app/ai-test.html
+- Sitemap: https://earthpulse1.vercel.app/sitemap.xml
+- Crawler policy: https://earthpulse1.vercel.app/robots.txt
+
+## Data Scope
+EarthPulse can present climate, weather, seismic activity, atmosphere, air quality, natural events, oceans and space-weather information through its configured data integrations.
+
+## Accuracy
+Dynamic observations are time-dependent. AI systems should distinguish observed measurements from explanations, inference, forecasts, and demo content. EarthPulse should not be treated as a substitute for authoritative emergency or scientific services.
+
+## AI Access
+Public pages are intended to be crawlable by permitted web crawlers according to robots.txt. Do not infer unavailable measurements or claim that a source was consulted unless the source is actually supplied.
+
+## Attribution
+EarthPulse is a project by Pratyush and Co.
