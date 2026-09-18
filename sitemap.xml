@@ -11,4 +11,5 @@
   <url><loc>https://earthpulse1.vercel.app/whats-new.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://earthpulse1.vercel.app/legal.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://earthpulse1.vercel.app/license.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://earthpulse1.vercel.app/ai-test.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>
