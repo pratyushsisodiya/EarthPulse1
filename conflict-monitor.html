@@ -55,6 +55,11 @@ main{max-width:1240px;margin:auto;padding:70px 22px 100px}.eyebrow{font-size:10p
   <section class="grid" id="conflicts"></section>
 
   <section class="sources">
+    <div class="status" style="margin-bottom:18px;padding:18px">
+      <div class="status-top"><span>Live source pipeline</span><span id="apiState" class="live">CONNECTING</span></div>
+      <strong id="apiStatus" style="font-size:22px">Loading verified data…</strong>
+      <small id="apiNote">EarthPulse never fills missing casualty figures with guesses. Source-backed records appear when the backend has authenticated access to the dataset.</small>
+    </div>
     <h2 class="section-title">Data provenance</h2>
     <p class="note">Every future live metric should carry its dataset, retrieval date and source URL. The estimate engine uses a median of independent reported figures when enough comparable reports are available; it is an aggregation of reports, not an independently verified death toll. EarthPulse does not merge incompatible casualty estimates into a single number. UCDP exposes public endpoints including BattleDeaths and GED events; ACLED requires authenticated API access; humanitarian datasets can be discovered through HDX.</p>
     <div class="source-grid">
@@ -73,42 +78,144 @@ main{max-width:1240px;margin:auto;padding:70px 22px 100px}.eyebrow{font-size:10p
       <article class="source"><b>UN humanitarian reporting</b><p>Situation reports and humanitarian snapshots can provide context on civilian impact and displacement.</p><a href="https://www.unocha.org/" target="_blank" rel="noopener">Open OCHA ↗</a></article>
     </div>
   </section>
+
+  <section class="sources" id="feedback">
+    <h2 class="section-title">Feedback &amp; reviews</h2>
+    <p class="note">You do not need to provide your real name, email, or other identifying information. EarthPulse creates a pseudonymous account such as <b>user001</b> and uses it only to associate your reviews and enforce the request limit. Limit: 5 review requests per 10 minutes per account.</p>
+    <div class="source-grid" style="grid-template-columns:1fr 1fr">
+      <form class="source" id="reviewForm">
+        <b>Leave a review</b>
+        <div style="display:grid;gap:9px;margin-top:14px">
+          <select id="reviewConflict" aria-label="Conflict" style="padding:11px;border-radius:10px;background:#0a0a0a;color:#fff;border:1px solid #292929">
+            <option>Ukraine war</option><option>Israel–Palestine conflict</option><option>Sudan conflict</option><option>Myanmar conflict</option><option>Eastern Democratic Republic of the Congo</option><option>Sahel conflicts</option>
+          </select>
+          <select id="reviewRating" aria-label="Rating" style="padding:11px;border-radius:10px;background:#0a0a0a;color:#fff;border:1px solid #292929">
+            <option value="5">5 / 5</option><option value="4">4 / 5</option><option value="3">3 / 5</option><option value="2">2 / 5</option><option value="1">1 / 5</option>
+          </select>
+          <textarea id="reviewText" maxlength="600" required placeholder="What should we improve?" style="min-height:105px;padding:11px;border-radius:10px;background:#0a0a0a;color:#fff;border:1px solid #292929;resize:vertical"></textarea>
+          <button class="filter active" type="submit">Submit review</button>
+          <small id="reviewStatus" style="color:#777">Your public identity will be a generated username.</small>
+        </div>
+      </form>
+      <div class="source">
+        <b>Recent reviews</b>
+        <div id="reviewList" style="display:grid;gap:10px;margin-top:14px"><span style="color:#777;font-size:11px">Loading reviews…</span></div>
+      </div>
+    </div>
+  </section>
 </main>
 <footer class="footer">EARTHPULSE · CONFLICT MONITOR · DATA SHOULD BE READ WITH ITS SOURCE, DATE AND UNCERTAINTY.</footer>
 <script>
 const conflicts=[
- {name:"Ukraine war",estimates:[],,region:"europe",label:"Europe",status:"Active conflict",summary:"A large-scale interstate war. Casualty and displacement figures vary by source and reporting period.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdpapi.pcr.uu.se/index.html"],["UN OCHA","https://www.unocha.org/"]]},
- {name:"Israel–Palestine conflict",estimates:[],,region:"middle-east",label:"Middle East",status:"Active conflict",summary:"A long-running conflict with major recent humanitarian impacts. Reported casualty figures require source and date context.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
- {name:"Sudan conflict",estimates:[],,region:"africa",label:"Africa",status:"Active conflict",summary:"An ongoing armed conflict with severe humanitarian and displacement consequences; estimates vary substantially.",fatalities:"Wide uncertainty",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
- {name:"Myanmar conflict",estimates:[],,region:"asia",label:"Asia",status:"Active conflict",summary:"Multiple armed actors and conflicts are affecting civilian populations across Myanmar.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdp.uu.se/"],["UN OCHA","https://www.unocha.org/"],["ACLED","https://acleddata.com/"]]},
- {name:"Eastern Democratic Republic of the Congo",estimates:[],,region:"africa",label:"Africa",status:"Active conflict",summary:"Armed violence in eastern DRC has produced significant civilian harm and displacement.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
- {name:"Sahel conflicts",estimates:[],,region:"africa",label:"Africa",status:"Multiple conflicts",summary:"Several armed conflicts and insurgencies affect countries across the Sahel; country-level views are needed for precise analysis.",fatalities:"Aggregate varies",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"],["UN OCHA","https://www.unocha.org/"]]}
+ {name:"Ukraine war",estimates:[],region:"europe",label:"Europe",status:"Active conflict",summary:"A large-scale interstate war. Casualty and displacement figures vary by source and reporting period.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdpapi.pcr.uu.se/index.html"],["UN OCHA","https://www.unocha.org/"]]},
+ {name:"Israel–Palestine conflict",estimates:[],region:"middle-east",label:"Middle East",status:"Active conflict",summary:"A long-running conflict with major recent humanitarian impacts. Reported casualty figures require source and date context.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
+ {name:"Sudan conflict",estimates:[],region:"africa",label:"Africa",status:"Active conflict",summary:"An ongoing armed conflict with severe humanitarian and displacement consequences; estimates vary substantially.",fatalities:"Wide uncertainty",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
+ {name:"Myanmar conflict",estimates:[],region:"asia",label:"Asia",status:"Active conflict",summary:"Multiple armed actors and conflicts are affecting civilian populations across Myanmar.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdp.uu.se/"],["UN OCHA","https://www.unocha.org/"],["ACLED","https://acleddata.com/"]]},
+ {name:"Eastern Democratic Republic of the Congo",estimates:[],region:"africa",label:"Africa",status:"Active conflict",summary:"Armed violence in eastern DRC has produced significant civilian harm and displacement.",fatalities:"Source-dependent",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UN OCHA","https://www.unocha.org/"],["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"]]},
+ {name:"Sahel conflicts",estimates:[],region:"africa",label:"Africa",status:"Multiple conflicts",summary:"Several armed conflicts and insurgencies affect countries across the Sahel; country-level views are needed for precise analysis.",fatalities:"Aggregate varies",displaced:"Source-dependent",updated:"Use latest verified source",sources:[["UCDP","https://ucdp.uu.se/"],["ACLED","https://acleddata.com/"],["UN OCHA","https://www.unocha.org/"]]}
 ];
-function median(values){if(!values.length)return "—";const a=values.map(x=>Number(x.value)).filter(Number.isFinite).sort((a,b)=>a-b);if(!a.length)return "—";const m=Math.floor(a.length/2);return (a.length%2?a[m]:(a[m-1]+a[m])/2).toLocaleString();}
+function median(values){const a=values.map(x=>Number(x.value)).filter(Number.isFinite).sort((a,b)=>a-b);if(!a.length)return null;const m=Math.floor(a.length/2);return a.length%2?a[m]:(a[m-1]+a[m])/2;}
 const root=document.getElementById("conflicts"),search=document.getElementById("search");
 let filter="all";
 function render(){
  const q=search.value.trim().toLowerCase();
  const rows=conflicts.filter(c=>(filter==="all"||c.region===filter)&&(!q||(c.name+" "+c.label).toLowerCase().includes(q)));
- root.innerHTML=rows.length?rows.map(c=>`<article class="card" data-region="${c.region}">
-  <div class="card-head"><span class="region">${c.label}</span><span class="badge">${c.status}</span></div>
-  <h2>${c.name}</h2><p class="summary">${c.summary}</p>
-  <div class="estimate-box">
-   <div class="estimate-head"><b>Cross-source estimate</b><span class="estimate-pill">${c.estimates.length>=3?"MEDIAN READY":"INSUFFICIENT REPORTS"}</span></div>
-   <div class="estimate-value">${median(c.estimates)}</div>
-   <div class="estimate-sub">Median of comparable reported figures. Reports are shown individually to preserve disagreement and uncertainty.</div>
-   <div class="report-list">${c.estimates.map(x=>`<span class="report-chip">${x.source}: ${x.value.toLocaleString()} · ${x.date}</span>`).join("")}</div>
-  </div>
-  <div class="metrics">
-   <div class="metric"><span>Reported deaths</span><strong class="uncertain">${c.fatalities}</strong></div>
-   <div class="metric"><span>Displacement</span><strong>${c.displaced}</strong></div>
-   <div class="metric"><span>Data update</span><strong style="font-size:12px">${c.updated}</strong></div>
-  </div>
-  <div class="provenance"><div class="provenance-title">Data provenance</div><div class="source-links">${c.sources.map(x=>`<a class="source-link" href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`).join("")}</div></div><div class="meta"><span>Source-linked · verify date before use</span><span>Not an exact live count</span></div>
- </article>`).join(""):'<div class="empty">No conflicts match this filter.</div>';
+ root.innerHTML=rows.length?rows.map(c=>{
+   const reports=(c.estimates||[]).filter(x=>Number.isFinite(Number(x.value)));
+   const med=median(reports);
+   return `<article class="card" data-region="${c.region}">
+    <div class="card-head"><span class="region">${c.label}</span><span class="badge">${c.status}</span></div>
+    <h2>${c.name}</h2><p class="summary">${c.summary}</p>
+    <div class="estimate-box">
+      <div class="estimate-head"><b>Cross-source estimate</b><span class="estimate-pill">${c.estimateStatus||"INSUFFICIENT REPORTS"}</span></div>
+      <div class="estimate-value">${med===null?"—":med.toLocaleString()}</div>
+      <div class="estimate-sub">Median of comparable, explicitly sourced reports. The median is an aggregation of reports, not an independently verified death toll.</div>
+      <div class="report-list">${reports.map(x=>`<a class="report-chip" href="${x.url||"#"}" target="_blank" rel="noopener">${x.source}: ${Number(x.value).toLocaleString()} · ${x.date||"undated"} ↗</a>`).join("")||'<span class="report-chip">No comparable report values available</span>'}</div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><span>Verified dataset</span><strong class="uncertain">${c.sourceStatus||"Source pending"}</strong></div>
+      <div class="metric"><span>Source records</span><strong>${reports.length}</strong></div>
+      <div class="metric"><span>Last sync</span><strong style="font-size:12px">${c.lastUpdated?new Date(c.lastUpdated).toLocaleString():"—"}</strong></div>
+    </div>
+    <div class="provenance"><div class="provenance-title">Data provenance</div><div class="source-links">${c.sources.map(x=>`<a class="source-link" href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`).join("")}</div></div>
+    <div class="meta"><span>Source-linked · dates matter</span><span>No invented counts</span></div>
+   </article>`;
+ }).join(""):'<div class="empty">No conflicts match this filter.</div>';
 }
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()}));
-search.addEventListener("input",render);render();
+search.addEventListener("input",render);
+
+async function loadLiveData(){
+  const state=document.getElementById("apiState"),status=document.getElementById("apiStatus"),note=document.getElementById("apiNote");
+  try{
+    const r=await fetch("/api/conflict-monitor",{cache:"no-store"});
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.message||"API unavailable");
+    conflicts.splice(0,conflicts.length,...data.conflicts.map(c=>({...c,
+      summary:(CONFIG_SUMMARIES[c.id]||"Source-backed conflict record."),
+      fatalities:"Source-backed / see estimate",
+      displaced:"Humanitarian source required",
+      updated:data.generatedAt
+    })));
+    state.textContent=data.ucdp?.connected?"LIVE":"SETUP NEEDED";
+    state.className=data.ucdp?.connected?"live":"badge";
+    status.textContent=data.ucdp?.connected?"Verified source pipeline connected":"Add the UCDP server token to enable live dataset retrieval";
+    note.textContent=data.ucdp?.connected?data.methodology:"The page is operational, but live UCDP retrieval needs UCDP_API_TOKEN (or CONFLICT_UCDP_TOKEN) on Vercel. No casualty number is fabricated while the source is unavailable.";
+    render();
+  }catch(e){
+    state.textContent="OFFLINE";state.className="badge";
+    status.textContent="Source service unavailable";
+    note.textContent="EarthPulse kept the interface running and did not substitute guessed casualty figures.";
+    render();
+  }
+}
+const CONFIG_SUMMARIES={
+ ukraine:"Large-scale interstate war; casualty figures require a defined source, period and metric.",
+ "israel-palestine":"Long-running conflict with major humanitarian impacts; reports differ by source and period.",
+ sudan:"Ongoing armed conflict with severe humanitarian and displacement consequences.",
+ myanmar:"Multiple armed conflicts affect civilian populations across Myanmar.",
+ drc:"Armed violence in eastern DRC has produced significant civilian harm and displacement.",
+ sahel:"Several armed conflicts and insurgencies affect countries across the Sahel."
+};
+
+let accountToken=localStorage.getItem("earthpulse_conflict_token");
+let accountName=localStorage.getItem("earthpulse_conflict_username");
+async function ensureAccount(){
+ if(accountToken&&accountName)return;
+ const r=await fetch("/api/conflict-account",{method:"POST"});
+ if(!r.ok)throw new Error("Account service unavailable");
+ const d=await r.json();
+ accountToken=d.token;accountName=d.username;
+ localStorage.setItem("earthpulse_conflict_token",accountToken);
+ localStorage.setItem("earthpulse_conflict_username",accountName);
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+async function loadReviews(){
+ const list=document.getElementById("reviewList");
+ try{
+  const r=await fetch("/api/conflict-feedback");
+  const d=await r.json();
+  list.innerHTML=(d.reviews||[]).map(x=>`<div class="report-chip" style="border-radius:14px;padding:11px"><b>${escapeHtml(x.username)}</b> · ${"★".repeat(Number(x.rating))}<br><span style="color:#777">${escapeHtml(x.conflict)}</span><br>${escapeHtml(x.review)}<br><small style="color:#555">${new Date(x.createdAt).toLocaleDateString()}</small></div>`).join("")||'<span style="color:#777;font-size:11px">No reviews yet.</span>';
+ }catch(_){list.innerHTML='<span style="color:#777;font-size:11px">Reviews are temporarily unavailable.</span>';}
+}
+document.getElementById("reviewForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const out=document.getElementById("reviewStatus");
+ try{
+  await ensureAccount();
+  const r=await fetch("/api/conflict-feedback",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+accountToken},body:JSON.stringify({
+    conflict:document.getElementById("reviewConflict").value,
+    rating:Number(document.getElementById("reviewRating").value),
+    review:document.getElementById("reviewText").value
+  })});
+  const d=await r.json();
+  if(!r.ok)throw new Error(d.message||"Review failed");
+  out.textContent="Submitted as "+accountName+". "+d.remaining+" request(s) left in this 10-minute window.";
+  document.getElementById("reviewText").value="";
+  loadReviews();
+ }catch(err){out.textContent=err.message||"Could not submit review.";}
+});
+loadReviews();loadLiveData();
 </script>
 </body>
 </html>
