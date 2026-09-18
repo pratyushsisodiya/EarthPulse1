@@ -95,5 +95,5 @@ function openCmd(){const m=$('#cmdModal');m.classList.add('open');$('#cmdInput')
 $('#cmdBtn').onclick=openCmd;$('#cmdInput').oninput=e=>renderCmd(e.target.value);$('#cmdModal').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open')};window.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openCmd()}if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();openCmd()}if(e.key==='Escape')$('#cmdModal').classList.remove('open')});
 load(1);
 </script>
-</body>
+<script defer src="/feedback-widget.js"></script>\n</body>
 </html>
