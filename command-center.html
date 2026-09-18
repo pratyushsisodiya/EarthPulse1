@@ -58,4 +58,4 @@ async function loadAQI(){try{const r=await fetch('https://air-quality-api.open-m
 async function refresh(){ $('sync').textContent='Syncing…';await Promise.all([loadUSGS(),loadSolar(),loadWeather(),loadAQI()]);const now=new Date();$('utc').textContent=now.toISOString().slice(11,19)+'Z';$('fresh').textContent=now.toLocaleTimeString();$('sync').textContent='Last sync: '+now.toLocaleTimeString()}
 $('search').addEventListener('input',renderEvents);$('refresh').onclick=refresh;$('reset').onclick=resetGlobe;$('globeReset').onclick=resetGlobe;$('zoomIn').onclick=()=>camera.position.z=Math.max(1.8,camera.position.z-.4);$('zoomOut').onclick=()=>camera.position.z=Math.min(6,camera.position.z+.4);$('auto').onclick=()=>{auto=!auto;$('auto').textContent='Auto rotate: '+(auto?'ON':'OFF')};initGlobe();refresh();setInterval(refresh,60000);setInterval(()=>$('utc').textContent=new Date().toISOString().slice(11,19)+'Z',1000);if(location.hash){const id=location.hash.slice(1);if($(id))setTimeout(()=>goto(id,id),150)}
 </script>
-</body></html>
+<script defer src="/feedback-widget.js"></script>\n</body></html>
