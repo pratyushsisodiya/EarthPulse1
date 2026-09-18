@@ -63,8 +63,9 @@ module.exports = async function handler(req, res) {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
     const rating = Math.max(1, Math.min(5, Number(body.rating)));
     const review = String(body.review || '').trim().slice(0, 600);
-    const conflict = String(body.conflict || '').trim().slice(0, 120);
-    if (!Number.isFinite(rating) || !review || !conflict) return res.status(400).json({ message: 'Rating, review and conflict are required.' });
+    const conflict = String(body.conflict || 'General EarthPulse').trim().slice(0, 120) || 'General EarthPulse';
+    const page = String(body.page || '').trim().slice(0, 180) || '/';
+    if (!Number.isFinite(rating) || !review) return res.status(400).json({ message: 'Rating and review are required.' });
 
     const item = {
       id: crypto.randomUUID(),
@@ -72,6 +73,7 @@ module.exports = async function handler(req, res) {
       rating,
       review,
       conflict,
+      page,
       createdAt: new Date().toISOString()
     };
     await kv(['LPUSH', 'conflict:reviews', JSON.stringify(item)]);
