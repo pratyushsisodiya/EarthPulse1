@@ -144,5 +144,5 @@ renderer.domElement.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX
 function frame(){requestAnimationFrame(frame);if(state.playing){let v=Number($('timeline').value)+2;if(v>=1000){v=1000;state.playing=false;$('playBtn').textContent='PLAY'}$('timeline').value=v;setTimeline(v)}if(spinTarget){camera.position.lerp(spinTarget,.05);camera.lookAt(0,0,0);if(camera.position.distanceTo(spinTarget)<.03)spinTarget=null}updateDayNight();stars.rotation.y+=.0003;renderer.render(scene,camera)}
 refresh();frame();
 </script>
-</body>
+<script defer src="/feedback-widget.js"></script>\n</body>
 </html>
