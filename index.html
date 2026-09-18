@@ -54,6 +54,7 @@
   <nav class="topnav" aria-label="Primary">
     <a href="/" aria-current="page">Home</a>
     <a href="/planet-pulse.html" class="nav-highlight">Planet Pulse</a>
+    <a href="/conflict-monitor.html" class="nav-highlight">Conflict Monitor</a>
     <a href="/whats-new.html" class="nav-highlight">What's New</a>
     <a href="#latest">Earth Intelligence</a>
     <a href="#dashboard">Analytics</a>
@@ -67,7 +68,7 @@
     <div class="eyebrow" id="eyebrow" title="Try clicking this a few times.">GLOBAL INTELLIGENCE / SYSTEM ONLINE</div>
     <h1 id="heroTitle" title="This title is hiding something.">See the planet as a system.</h1>
     <p>Earth intelligence for climate, weather, seismic activity, atmosphere, oceans and space weather — designed as one coherent experience.</p>
-    <div class="actions"><button class="btn primary" id="explore">Explore Earth</button><button class="btn" id="planet">Launch Planet Pulse</button></div>
+    <div class="actions"><button class="btn primary" id="conflict">Conflict Monitor</button><button class="btn" id="planet">Launch Planet Pulse</button></div>
     <div class="hero-orb" id="heroOrb" aria-label="Interactive Earth globe">
       <button class="globe-pin" id="globePin" aria-label="Open EarthPulse easter egg"></button>
       <div class="globe-pin-label" id="globePinLabel">SECRET EARTH SIGNAL</div>
@@ -112,7 +113,7 @@
 const frame=document.getElementById('earthpulse-frame');
 function openPulse(){window.location.href='/planet-pulse.html'}
 document.getElementById('planet').onclick=openPulse;
-document.getElementById('explore').onclick=()=>document.getElementById('latest').scrollIntoView({behavior:'smooth'});
+document.getElementById('conflict').onclick=()=>window.location.href='/conflict-monitor.html';
 const signals=[
   ['Bro, Earth called. It says stop spinning the globe.','SIGNAL 01 · ROTATION CONTROL'],
   ['Breaking news: Earth is still mostly round. Scientists remain impressed.','SIGNAL 02 · GEOMETRY CONFIRMED'],
