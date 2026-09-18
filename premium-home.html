@@ -82,5 +82,5 @@ const obs=new IntersectionObserver(entries=>entries.forEach(x=>x.isIntersecting&
 const overlay=document.getElementById('searchOverlay'),input=document.getElementById('searchInput'),results=document.getElementById('quickResults');function openSearch(){overlay.classList.add('open');input.value='';input.focus();filter('')}function closeSearch(){overlay.classList.remove('open')}function filter(q){const needle=q.trim().toLowerCase();results.querySelectorAll('a').forEach(a=>a.style.display=a.textContent.toLowerCase().includes(needle)?'flex':'none')}document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}if(e.key==='Escape')closeSearch()});overlay.addEventListener('click',e=>{if(e.target===overlay)closeSearch()});document.getElementById('closeSearch').addEventListener('click',closeSearch);input.addEventListener('input',()=>filter(input.value));
 })();
 </script>
-</body>
+<script defer src="/feedback-widget.js"></script>\n</body>
 </html>
