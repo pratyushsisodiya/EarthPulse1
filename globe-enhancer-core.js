@@ -29,19 +29,26 @@
     #ep-live{padding:9px 11px;border-radius:12px;font-size:9px;font-weight:900;color:#86efac;letter-spacing:.1em}#ep-live i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;margin-right:6px}
     #ep-close{margin-left:auto;pointer-events:auto;border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.78);color:#fff;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:900;transition:.2s}
     #ep-close:hover{border-color:rgba(103,232,249,.45);transform:translateY(-1px)}
-    #ep-side{position:absolute;top:84px;right:18px;bottom:18px;width:310px;z-index:5;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-    .ep-card{border-radius:18px;padding:14px;pointer-events:auto}.ep-card h3{font-size:9px;letter-spacing:.15em;color:#94a3b8;margin:0 0 9px}
+    #ep-side{position:absolute;top:84px;right:18px;bottom:18px;width:330px;z-index:5;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+    .ep-card{border-radius:19px;padding:15px;pointer-events:auto}.ep-card h3{font-size:9px;letter-spacing:.16em;color:#a5b4c8;margin:0 0 9px}
+    .ep-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.ep-live-chip{font-size:7px;letter-spacing:.1em;color:#86efac;border:1px solid rgba(134,239,172,.2);background:rgba(34,197,94,.06);border-radius:999px;padding:5px 7px}.ep-live-chip i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 9px #22c55e;margin-right:5px}
+    .ep-meter{height:4px;border-radius:999px;background:rgba(148,163,184,.10);overflow:hidden;margin-top:9px}.ep-meter i{display:block;height:100%;width:72%;border-radius:inherit;background:linear-gradient(90deg,#22d3ee,#67e8f9);box-shadow:0 0 12px rgba(103,232,249,.6)}
+    .ep-section-label{font-size:7px;color:#475569;letter-spacing:.12em;margin:12px 0 5px}
     .ep-card .ep-kicker{font-size:8px;color:#475569;letter-spacing:.09em;margin:-4px 0 8px}
     .ep-stat{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid rgba(148,163,184,.08);font-size:10px}.ep-stat:first-of-type{border-top:0}.ep-val{font-weight:900;color:#bae6fd}
-    #ep-events{overflow:auto;max-height:230px;padding-right:3px}
-    .ep-event{padding:10px 8px;border:1px solid transparent;border-radius:11px;cursor:pointer;transition:.18s}.ep-event + .ep-event{margin-top:2px}.ep-event:hover{background:rgba(103,232,249,.055);border-color:rgba(103,232,249,.12)}.ep-event:hover b{color:#67e8f9}.ep-event b{font-size:10px}.ep-event span{display:block;color:#64748b;font-size:8px;margin-top:3px}
+    #ep-events{overflow:auto;max-height:205px;padding-right:3px;scrollbar-width:thin}
+    .ep-event{position:relative;padding:10px 9px 10px 18px;border:1px solid transparent;border-radius:12px;cursor:pointer;transition:.18s}.ep-event:before{content:"";position:absolute;left:7px;top:15px;width:5px;height:5px;border-radius:50%;background:#67e8f9;box-shadow:0 0 9px #67e8f9}.ep-event + .ep-event{margin-top:2px}.ep-event:hover{background:rgba(103,232,249,.06);border-color:rgba(103,232,249,.14);transform:translateX(2px)}.ep-event:hover b{color:#67e8f9}.ep-event b{font-size:10px}.ep-event span{display:block;color:#64748b;font-size:8px;margin-top:3px}
     #ep-mission{margin-top:auto}.ep-copy{font-size:9px;color:#94a3b8;line-height:1.55;margin:0 0 10px}.ep-actions{display:flex;gap:7px;flex-wrap:wrap}.ep-btn{border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.78);color:#cbd5e1;border-radius:10px;padding:8px 10px;font-size:9px;font-weight:850;cursor:pointer;transition:.18s}.ep-btn:hover{border-color:rgba(103,232,249,.45);color:#fff;transform:translateY(-1px)}.ep-primary{background:linear-gradient(135deg,rgba(8,145,178,.24),rgba(14,116,144,.08));border-color:rgba(34,211,238,.3);color:#a5f3fc}
-    #ep-legend{position:absolute;left:20px;bottom:58px;z-index:5;padding:11px 13px;border-radius:14px;font-size:8px;color:#94a3b8}
-    .ep-legend-row{display:flex;gap:10px;align-items:center}.ep-legend-row + .ep-legend-row{margin-top:6px}.ep-key{width:7px;height:7px;border-radius:50%;box-shadow:0 0 10px currentColor}
+    #ep-legend{position:absolute;left:20px;bottom:68px;z-index:5;padding:12px 14px;border-radius:15px;font-size:8px;color:#94a3b8}
+    .ep-legend-title{font-size:7px;letter-spacing:.13em;color:#64748b;margin-bottom:8px}.ep-legend-row{display:flex;gap:9px;align-items:center}.ep-legend-row + .ep-legend-row{margin-top:6px}.ep-key{width:7px;height:7px;border-radius:50%;box-shadow:0 0 10px currentColor}
+    #ep-orbit{position:absolute;left:50%;top:50%;width:58%;height:72%;transform:translate(-50%,-50%);border:1px solid rgba(103,232,249,.07);border-radius:50%;pointer-events:none;z-index:1}
+    #ep-orbit:before,#ep-orbit:after{content:"";position:absolute;inset:9%;border:1px solid rgba(103,232,249,.045);border-radius:50%;transform:rotate(22deg)}
+    #ep-orbit:after{transform:rotate(-22deg)}
     #ep-controls{position:absolute;left:20px;bottom:18px;z-index:5;display:flex;gap:7px;align-items:center}
     .ep-help{padding:9px 11px;border-radius:11px;font-size:8px;color:#64748b}
     #ep-zoom{display:flex;overflow:hidden;border-radius:11px}.ep-zoom button{border:0;border-right:1px solid rgba(148,163,184,.12);background:rgba(15,23,42,.82);color:#cbd5e1;width:34px;height:32px;cursor:pointer;font-weight:900}.ep-zoom button:last-child{border-right:0}.ep-zoom button:hover{background:rgba(103,232,249,.1);color:#fff}
     #ep-toast{position:absolute;left:50%;bottom:24px;transform:translate(-50%,16px);opacity:0;transition:.2s;z-index:20;background:rgba(15,23,42,.96);border:1px solid rgba(103,232,249,.28);border-radius:12px;padding:10px 14px;font-size:9px;font-weight:850;pointer-events:none;box-shadow:0 15px 45px rgba(0,0,0,.4)}.show{opacity:1!important;transform:translate(-50%,0)!important}
+    @media(max-width:1100px){#ep-side{width:290px}#ep-legend{left:14px}}
     @media(max-width:900px){#ep-side{width:280px}#ep-legend{display:none}}
     @media(max-width:800px){#ep-side{left:10px;right:10px;width:auto;top:auto;height:39%;bottom:10px;display:block;overflow:auto}.ep-card{margin-bottom:7px}#ep-events{max-height:115px}#ep-controls{left:10px;bottom:10px}#ep-help{display:none}#ep-live{display:none}#ep-stage{inset:7px;border-radius:21px}#ep-top{top:9px;left:9px;right:9px}#ep-legend{display:none}}
     @media(max-width:520px){#ep-title{font-size:10px}#ep-sub{font-size:7px}#ep-brand{padding:9px 10px}#ep-side{height:42%}#ep-controls{bottom:8px}.ep-btn{padding:7px 8px}}
@@ -52,16 +59,16 @@
   overlay.id = 'ep-overlay';
   overlay.innerHTML = `
     <div id="ep-stage">
-      <canvas id="ep-canvas"></canvas>
+      <canvas id="ep-canvas"></canvas><div id="ep-orbit"></div>
       <div id="ep-top">
         <div id="ep-brand" class="ep-glass"><span id="ep-dot"></span><div><div id="ep-title">EARTHPULSE · PLANET PULSE</div><div id="ep-sub">EARTH INTELLIGENCE EXPLORER</div></div></div>
         <div id="ep-live" class="ep-glass"><i></i>INTERACTIVE VIEW</div>
         <button id="ep-close">✕</button>
       </div>
       <aside id="ep-side">
-        <section class="ep-card ep-glass"><h3>PLANET STATUS</h3><div class="ep-kicker">EXPLORER TELEMETRY</div><div class="ep-stat"><span>Tracked events</span><span class="ep-val" id="ep-count">07</span></div><div class="ep-stat"><span>Explorer mode</span><span class="ep-val">3D VIEW</span></div><div class="ep-stat"><span>Data label</span><span class="ep-val">DEMO</span></div></section>
-        <section class="ep-card ep-glass"><h3>EVENT RADAR · DEMO DATA</h3><div id="ep-events"></div></section>
-        <section id="ep-mission" class="ep-card ep-glass"><h3>MISSION MODE</h3><p id="ep-mission-copy" class="ep-copy">Select a mission target, rotate Earth and click the highlighted marker.</p><div class="ep-actions"><button id="ep-start" class="ep-btn ep-primary">▶ Start mission</button><button id="ep-random" class="ep-btn">✦ Random</button></div></section>
+        <section class="ep-card ep-glass"><div class="ep-card-head"><h3>PLANET STATUS</h3><span class="ep-live-chip"><i></i>EXPLORER</span></div><div class="ep-kicker">EARTHPULSE VISUAL TELEMETRY</div><div class="ep-stat"><span>Tracked event points</span><span class="ep-val" id="ep-count">07</span></div><div class="ep-stat"><span>View mode</span><span class="ep-val">3D ORBIT</span></div><div class="ep-stat"><span>Dataset</span><span class="ep-val">DEMO</span></div><div class="ep-meter"><i></i></div></section>
+        <section class="ep-card ep-glass"><div class="ep-card-head"><h3>EVENT RADAR</h3><span class="ep-live-chip">DEMO DATA</span></div><div class="ep-section-label">SELECT A TARGET TO FOCUS THE GLOBE</div><div id="ep-events"></div></section>
+        <section id="ep-mission" class="ep-card ep-glass"><div class="ep-card-head"><h3>MISSION MODE</h3><span class="ep-live-chip">INTERACTIVE</span></div><p id="ep-mission-copy" class="ep-copy">Select a mission target, rotate Earth and click the highlighted marker.</p><div class="ep-actions"><button id="ep-start" class="ep-btn ep-primary">▶ Start mission</button><button id="ep-random" class="ep-btn">✦ Random</button></div></section>
       </aside>
       <div id="ep-legend" class="ep-glass">
         <div class="ep-legend-row"><i class="ep-key" style="color:#fb7185;background:#fb7185"></i> Seismic</div>
@@ -92,15 +99,23 @@
 
   function draw(){
     ctx.clearRect(0,0,w,h);
-    const glow=ctx.createRadialGradient(cx-r*.18,cy-r*.2,r*.08,cx,cy,r*1.18); glow.addColorStop(0,'#38bdf8'); glow.addColorStop(.55,'#075985'); glow.addColorStop(1,'#020617');
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=glow;ctx.fill();
+    const bg=ctx.createRadialGradient(cx-r*.15,cy-r*.22,r*.05,cx,cy,r*1.18); bg.addColorStop(0,'#164e72'); bg.addColorStop(.48,'#075985'); bg.addColorStop(.78,'#06324e'); bg.addColorStop(1,'#020617');
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();
+    // Atmospheric rim and night-side shading.
+    ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+    const shade=ctx.createLinearGradient(cx-r*.9,cy,cx+r*.95,cy); shade.addColorStop(0,'rgba(0,0,0,.52)'); shade.addColorStop(.42,'rgba(0,0,0,.05)'); shade.addColorStop(.7,'rgba(0,0,0,.0)'); shade.addColorStop(1,'rgba(0,0,0,.38)');
+    ctx.fillStyle=shade;ctx.fillRect(cx-r,cy-r,r*2,r*2);
+    ctx.restore();
     ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
     for(let lat=-60;lat<=60;lat+=30){const pts=[];for(let lon=-180;lon<=180;lon+=4)pts.push(project(lat,lon));ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle='rgba(125,211,252,.10)';ctx.lineWidth=1;ctx.stroke();}
     for(let lon=-150;lon<=180;lon+=30){const pts=[];for(let lat=-90;lat<=90;lat+=4)pts.push(project(lat,lon));ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle='rgba(125,211,252,.08)';ctx.lineWidth=1;ctx.stroke();}
     ctx.restore();
+    // Subtle latitude glow and equatorial ring for a more dimensional globe.
+    ctx.beginPath();ctx.ellipse(cx,cy+r*.02,r*.98,r*.20,rotX*.22,0,Math.PI*2);ctx.strokeStyle='rgba(103,232,249,.10)';ctx.lineWidth=1.2;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,r*1.025,0,Math.PI*2);ctx.strokeStyle='rgba(103,232,249,.20)';ctx.lineWidth=1.5;ctx.shadowColor='#38bdf8';ctx.shadowBlur=18;ctx.stroke();ctx.shadowBlur=0;
 
     EVENTS.forEach((e,i)=>{const p=project(e.lat,e.lon);const visible=p.z>-0.15;if(!visible)return;const rr=i===mission?7:4.5;ctx.beginPath();ctx.arc(p.x,p.y,rr,0,Math.PI*2);ctx.fillStyle=e.color;ctx.shadowColor=e.color;ctx.shadowBlur=14;ctx.fill();ctx.shadowBlur=0;if(i===mission){ctx.beginPath();ctx.arc(p.x,p.y,rr+8+Math.sin(Date.now()/260)*2,0,Math.PI*2);ctx.strokeStyle=e.color;ctx.globalAlpha=.5;ctx.stroke();ctx.globalAlpha=1;}});
-    const halo=ctx.createRadialGradient(cx,cy,r*.76,cx,cy,r*1.08);halo.addColorStop(0,'rgba(103,232,249,0)');halo.addColorStop(1,'rgba(56,189,248,.18)');ctx.beginPath();ctx.arc(cx,cy,r*1.02,0,Math.PI*2);ctx.fillStyle=halo;ctx.fill();
+    const halo=ctx.createRadialGradient(cx,cy,r*.78,cx,cy,r*1.12);halo.addColorStop(0,'rgba(103,232,249,0)');halo.addColorStop(.78,'rgba(56,189,248,.05)');halo.addColorStop(1,'rgba(56,189,248,.22)');ctx.beginPath();ctx.arc(cx,cy,r*1.02,0,Math.PI*2);ctx.fillStyle=halo;ctx.fill();
   }
 
   function frame(){ if(!overlay.classList.contains('open')){cancelAnimationFrame(raf);return;} if(auto&&!drag)rotY+=.0035;draw();raf=requestAnimationFrame(frame); }
