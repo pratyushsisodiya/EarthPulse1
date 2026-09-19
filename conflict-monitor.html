@@ -32,14 +32,14 @@ main{max-width:1240px;margin:auto;padding:70px 22px 100px}.eyebrow{font-size:10p
 <main>
   <section class="hero">
     <div>
-      <div class="eyebrow">GLOBAL HUMANITARIAN INTELLIGENCE / SOURCE AWARE</div>
+      <div class="eyebrow">GLOBAL HUMANITARIAN INTELLIGENCE / SOURCE AWARE</div><div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;border:1px solid #59451a;background:#171208;color:#fbbf24;border-radius:999px;padding:7px 11px;font-size:9px;letter-spacing:.12em;text-transform:uppercase">DEMO FALLBACK ENABLED · SYNTHETIC DATA ONLY</div>
       <h1>Conflict Monitor.</h1>
       <p>A neutral EarthPulse workspace for tracking active armed conflicts, reported fatalities, displacement and humanitarian impact. Figures are labelled by source and uncertainty instead of being presented as exact counts.</p>
     </div>
     <aside class="status">
       <div class="status-top"><span>Data posture</span><span class="live">SOURCE-FIRST</span></div>
-      <strong>Do not invent.</strong>
-      <small>Conflict casualty figures can be incomplete, delayed or disputed. EarthPulse separates reported figures from estimates and shows the reporting source and date.</small>
+      <strong>Source first. Demo second.</strong>
+      <small>Conflict casualty figures can be incomplete, delayed or disputed. EarthPulse uses verified sources when available and falls back to clearly labelled synthetic demo data when they are unavailable.</small>
     </aside>
   </section>
 
@@ -58,7 +58,7 @@ main{max-width:1240px;margin:auto;padding:70px 22px 100px}.eyebrow{font-size:10p
     <div class="status" style="margin-bottom:18px;padding:18px">
       <div class="status-top"><span>Live source pipeline</span><span id="apiState" class="live">CONNECTING</span></div>
       <strong id="apiStatus" style="font-size:22px">Loading verified data…</strong>
-      <small id="apiNote">EarthPulse never fills missing casualty figures with guesses. Source-backed records appear when the backend has authenticated access to the dataset.</small>
+      <small id="apiNote">EarthPulse uses source-backed records when available. If no source records are available, clearly labelled synthetic demo figures keep the interface functional; they are not real-world intelligence.</small>
     </div>
     <h2 class="section-title">Data provenance</h2>
     <p class="note">Every future live metric should carry its dataset, retrieval date and source URL. The estimate engine uses a median of independent reported figures when enough comparable reports are available; it is an aggregation of reports, not an independently verified death toll. EarthPulse does not merge incompatible casualty estimates into a single number. UCDP exposes public endpoints including BattleDeaths and GED events; ACLED requires authenticated API access; humanitarian datasets can be discovered through HDX.</p>
@@ -133,7 +133,7 @@ function render(){
       <div class="report-list">${reports.map(x=>`<a class="report-chip" href="${x.url||"#"}" target="_blank" rel="noopener">${x.source}: ${Number(x.value).toLocaleString()} · ${x.date||"undated"} ↗</a>`).join("")||'<span class="report-chip">No comparable report values available</span>'}</div>
     </div>
     <div class="metrics">
-      <div class="metric"><span>Verified dataset</span><strong class="uncertain">${c.sourceStatus||"Source pending"}</strong></div>
+      <div class="metric"><span>Data mode</span><strong class="uncertain">${c.dataMode||c.sourceStatus||"Source pending"}</strong></div>
       <div class="metric"><span>Source records</span><strong>${reports.length}</strong></div>
       <div class="metric"><span>Last sync</span><strong style="font-size:12px">${c.lastUpdated?new Date(c.lastUpdated).toLocaleString():"—"}</strong></div>
     </div>
@@ -157,10 +157,11 @@ async function loadLiveData(){
       displaced:"Humanitarian source required",
       updated:data.generatedAt
     })));
-    state.textContent=data.ucdp?.connected?"LIVE":"SETUP NEEDED";
-    state.className=data.ucdp?.connected?"live":"badge";
-    status.textContent=data.ucdp?.connected?"Verified source pipeline connected":"Add the UCDP server token to enable live dataset retrieval";
-    note.textContent=data.ucdp?.connected?data.methodology:"The page is operational, but live UCDP retrieval needs UCDP_API_TOKEN (or CONFLICT_UCDP_TOKEN) on Vercel. No casualty number is fabricated while the source is unavailable.";
+    const hasDemo = data.conflicts?.some(c=>c.demoMode);
+    state.textContent=data.ucdp?.connected && !hasDemo?"LIVE":(hasDemo?"DEMO":"SETUP NEEDED");
+    state.className=data.ucdp?.connected && !hasDemo?"live":"badge";
+    status.textContent=data.ucdp?.connected && !hasDemo?"Verified source pipeline connected":"Synthetic demo fallback is active";
+    note.textContent=hasDemo ? "Synthetic values are displayed only to keep the interface functional. They are explicitly labelled DEMO / SYNTHETIC and are not real-world casualty counts or intelligence." : data.methodology;
     render();
   }catch(e){
     state.textContent="OFFLINE";state.className="badge";
