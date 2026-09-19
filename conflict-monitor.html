@@ -137,7 +137,7 @@ function render(){
       <div class="metric"><span>Source records</span><strong>${reports.length}</strong></div>
       <div class="metric"><span>Last sync</span><strong style="font-size:12px">${c.lastUpdated?new Date(c.lastUpdated).toLocaleString():"—"}</strong></div>
     </div>
-    <div class="provenance"><div class="provenance-title">Data provenance</div><div class="source-links">${c.sources.map(x=>`<a class="source-link" href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`).join("")}</div></div>
+    <div class="provenance"><div class="provenance-title">Data provenance</div><div class="source-links">${(c.sources||[["UCDP","https://ucdp.uu.se/"],["UN OCHA","https://www.unocha.org/"]]).map(x=>`<a class="source-link" href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`).join("")}</div></div>
     <div class="meta"><span>Source-linked · dates matter</span><span>No invented counts</span></div>
    </article>`;
  }).join(""):'<div class="empty">No conflicts match this filter.</div>';
