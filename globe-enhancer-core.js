@@ -125,6 +125,8 @@
         loader.loadAsync(base+'earth_specular_2048.jpg'),
         loader.loadAsync(base+'earth_clouds_1024.png')
       ]);
+      // Country/continent boundaries: a GeoJSON overlay is loaded separately and
+      // projected onto the same sphere, so the geography remains visible while rotating.
       earthMap.colorSpace = THREE.SRGBColorSpace;
       cloudMap.colorSpace = THREE.SRGBColorSpace;
 
@@ -146,6 +148,44 @@
         new THREE.MeshPhongMaterial({map:cloudMap,transparent:true,depthWrite:false,opacity:.58})
       );
       group.add(clouds);
+
+      // Geographic boundary overlay. Natural Earth-derived GeoJSON is rendered as
+      // line segments slightly above the surface. If unavailable, the textured globe remains usable.
+      try{
+        const geoResp = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
+        if(geoResp.ok){
+          const topo = await geoResp.json();
+          const geo = await import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm');
+          const countries = geo.feature(topo, topo.objects.countries);
+          const lines = new THREE.Group();
+          const radius = 1.006;
+          const point = (lon,lat)=>{
+            const la=lat*Math.PI/180, lo=lon*Math.PI/180;
+            return new THREE.Vector3(
+              Math.cos(la)*Math.sin(lo)*radius,
+              Math.sin(la)*radius,
+              Math.cos(la)*Math.cos(lo)*radius
+            );
+          };
+          countries.features.forEach(f=>{
+            const geom=f.geometry;
+            const drawRing=ring=>{
+              if(!ring || ring.length<2) return;
+              const pts=ring.map(([lon,lat])=>point(lon,lat));
+              const g=new THREE.BufferGeometry().setFromPoints(pts);
+              lines.add(new THREE.Line(g,new THREE.LineBasicMaterial({
+                color:0x8eefff,transparent:true,opacity:.22
+              })));
+            };
+            if(geom.type==='Polygon') geom.coordinates.forEach(drawRing);
+            if(geom.type==='MultiPolygon') geom.coordinates.forEach(poly=>poly.forEach(drawRing));
+          });
+          group.add(lines);
+          window.__EARTHPULSE_COUNTRY_LINES__=lines;
+        }
+      }catch(geoErr){
+        console.warn('Country boundary overlay unavailable.',geoErr);
+      }
 
       const atmosphere = new THREE.Mesh(
         new THREE.SphereGeometry(1.055,96,96),
