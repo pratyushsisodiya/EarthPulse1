@@ -174,13 +174,15 @@
               const pts=ring.map(([lon,lat])=>point(lon,lat));
               const g=new THREE.BufferGeometry().setFromPoints(pts);
               lines.add(new THREE.Line(g,new THREE.LineBasicMaterial({
-                color:0x8eefff,transparent:true,opacity:.22
+                color:0x8eefff,transparent:true,opacity:.62
               })));
             };
             if(geom.type==='Polygon') geom.coordinates.forEach(drawRing);
             if(geom.type==='MultiPolygon') geom.coordinates.forEach(poly=>poly.forEach(drawRing));
           });
-          group.add(lines);
+          // Lock the boundary layer to the exact Earth mesh so it cannot drift
+          // when the textured planet rotates independently.
+          earth.add(lines);
           window.__EARTHPULSE_COUNTRY_LINES__=lines;
         }
       }catch(geoErr){
@@ -222,11 +224,12 @@
       realCanvas.classList.remove('loading');
 
       function render(){
-        if(!overlay.classList.contains('open')) return;
         controls.update();
-        earth.rotation.y += .00055;
-        clouds.rotation.y += .00072;
-        renderer.render(scene,camera);
+        if(overlay.classList.contains('open')){
+          earth.rotation.y += .00055;
+          clouds.rotation.y += .00072;
+          renderer.render(scene,camera);
+        }
         requestAnimationFrame(render);
       }
       render();
