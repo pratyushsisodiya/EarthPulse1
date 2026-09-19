@@ -109,7 +109,10 @@ module.exports = async function handler(req,res) {
       })).filter(x=>Number.isFinite(x.value));
       const sourceReports = reports.filter(x=>x.conflictId===c.id && Number.isFinite(Number(x.value))).map(x=>({...x,value:Number(x.value)}));
       const demoReports = DEMO_REPORTS[c.id].map(x=>({...x, metric:'DEMO / synthetic casualty estimate', url:'#demo-data'}));
-      const allReports=[...ucdpValues,...sourceReports,...demoReports];
+      // Never mix synthetic figures with source-backed figures.
+      const sourceReportsAll=[...ucdpValues,...sourceReports];
+      const useDemo = sourceReportsAll.length === 0;
+      const allReports = useDemo ? demoReports : sourceReportsAll;
       const m=median(allReports.map(x=>x.value));
       return {
         ...c,
@@ -119,15 +122,17 @@ module.exports = async function handler(req,res) {
         estimates: allReports,
         median:m,
         estimateStatus: allReports.length>=3?'MEDIAN READY':'INSUFFICIENT REPORTS',
-        demoMode: true,
-        sourceStatus: UCDP_TOKEN?'UCDP CONNECTED':'UCDP TOKEN REQUIRED'
+        demoMode: useDemo,
+        dataMode: useDemo ? 'DEMO / SYNTHETIC' : 'SOURCE-BACKED',
+        sourceStatus: useDemo ? 'DEMO DATA' : 'UCDP CONNECTED'
       };
     });
 
     return res.status(200).json({
       generatedAt:new Date().toISOString(),
-      methodology:'DEMO MODE: synthetic figures are shown only to demonstrate the estimation UI. They are not real reports, real casualty counts, or verified data. When authenticated source data is available, EarthPulse uses source-backed figures instead.',
+      methodology:'Synthetic figures are used only when no source-backed report is available. They are clearly labelled DEMO / SYNTHETIC and must not be interpreted as real-world casualty counts or verified intelligence.',
       ucdp:{connected:Boolean(UCDP_TOKEN),version:'26.1',source:'https://ucdp.uu.se/apidocs/'},
+      demo:{enabled:true,description:'Synthetic UI-only fallback data. Not real reports, events, casualty counts, or intelligence.'},
       conflicts:data
     });
   } catch(e) {
