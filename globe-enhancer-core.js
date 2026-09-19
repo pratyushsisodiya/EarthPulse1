@@ -19,7 +19,10 @@
     #ep-overlay.open{display:block}
     #ep-stage{position:absolute;inset:12px;border:1px solid rgba(125,211,252,.18);border-radius:30px;overflow:hidden;background:radial-gradient(circle at 38% 43%,rgba(14,165,233,.12),rgba(2,6,23,.92) 58%);box-shadow:0 35px 140px rgba(0,0,0,.72)}
     #ep-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.035),transparent 28%,transparent 72%,rgba(103,232,249,.025))}
-    #ep-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+    #ep-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;opacity:0;pointer-events:none}
+    #ep-real-earth{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;z-index:2}
+    #ep-real-earth.drag{cursor:grabbing}
+    #ep-real-earth.loading{opacity:.35;transition:opacity .4s}
     #ep-canvas.drag{cursor:grabbing}
     .ep-glass{background:rgba(2,6,23,.62);border:1px solid rgba(148,163,184,.14);box-shadow:0 14px 45px rgba(0,0,0,.30);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
     #ep-top{position:absolute;top:18px;left:18px;right:18px;z-index:5;display:flex;align-items:center;gap:10px;pointer-events:none}
@@ -41,7 +44,7 @@
     #ep-mission{margin-top:auto}.ep-copy{font-size:9px;color:#94a3b8;line-height:1.55;margin:0 0 10px}.ep-actions{display:flex;gap:7px;flex-wrap:wrap}.ep-btn{border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.78);color:#cbd5e1;border-radius:10px;padding:8px 10px;font-size:9px;font-weight:850;cursor:pointer;transition:.18s}.ep-btn:hover{border-color:rgba(103,232,249,.45);color:#fff;transform:translateY(-1px)}.ep-primary{background:linear-gradient(135deg,rgba(8,145,178,.24),rgba(14,116,144,.08));border-color:rgba(34,211,238,.3);color:#a5f3fc}
     #ep-legend{position:absolute;left:20px;bottom:68px;z-index:5;padding:12px 14px;border-radius:15px;font-size:8px;color:#94a3b8}
     .ep-legend-title{font-size:7px;letter-spacing:.13em;color:#64748b;margin-bottom:8px}.ep-legend-row{display:flex;gap:9px;align-items:center}.ep-legend-row + .ep-legend-row{margin-top:6px}.ep-key{width:7px;height:7px;border-radius:50%;box-shadow:0 0 10px currentColor}
-    #ep-orbit{position:absolute;left:50%;top:50%;width:58%;height:72%;transform:translate(-50%,-50%);border:1px solid rgba(103,232,249,.07);border-radius:50%;pointer-events:none;z-index:1}
+    #ep-orbit{position:absolute;left:50%;top:50%;width:58%;height:72%;z-index:1;transform:translate(-50%,-50%);border:1px solid rgba(103,232,249,.07);border-radius:50%;pointer-events:none;z-index:1}
     #ep-orbit:before,#ep-orbit:after{content:"";position:absolute;inset:9%;border:1px solid rgba(103,232,249,.045);border-radius:50%;transform:rotate(22deg)}
     #ep-orbit:after{transform:rotate(-22deg)}
     #ep-controls{position:absolute;left:20px;bottom:18px;z-index:5;display:flex;gap:7px;align-items:center}
@@ -59,7 +62,7 @@
   overlay.id = 'ep-overlay';
   overlay.innerHTML = `
     <div id="ep-stage">
-      <canvas id="ep-canvas"></canvas><div id="ep-orbit"></div>
+      <canvas id="ep-canvas"></canvas><canvas id="ep-real-earth" aria-label="Interactive realistic Earth globe"></canvas><div id="ep-orbit"></div>
       <div id="ep-top">
         <div id="ep-brand" class="ep-glass"><span id="ep-dot"></span><div><div id="ep-title">EARTHPULSE · PLANET PULSE</div><div id="ep-sub">EARTH INTELLIGENCE EXPLORER</div></div></div>
         <div id="ep-live" class="ep-glass"><i></i>INTERACTIVE VIEW</div>
@@ -80,6 +83,121 @@
       <div id="ep-toast"></div>
     </div>`;
   document.body.appendChild(overlay);
+
+  // Real textured Earth renderer. Uses Three.js + NASA-style Earth texture maps;
+  // the existing canvas remains as a safe fallback if WebGL/CDN loading fails.
+  const realCanvas = document.getElementById('ep-real-earth');
+  realCanvas.classList.add('loading');
+
+  async function initRealEarth(){
+    try{
+      const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js');
+      const {OrbitControls} = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js');
+      const renderer = new THREE.WebGLRenderer({canvas:realCanvas,alpha:true,antialias:true,powerPreference:'high-performance'});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+      renderer.setSize(realCanvas.clientWidth,realCanvas.clientHeight,false);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(35,1,.1,100);
+      camera.position.set(0,0,3.05);
+
+      const controls = new OrbitControls(camera,realCanvas);
+      controls.enableDamping = true;
+      controls.dampingFactor = .045;
+      controls.enablePan = false;
+      controls.minDistance = 2.05;
+      controls.maxDistance = 4.8;
+      controls.autoRotate = false;
+      controls.autoRotateSpeed = .45;
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const loader = new THREE.TextureLoader();
+      loader.setCrossOrigin('anonymous');
+      const base = 'https://threejs.org/examples/textures/planets/';
+      const [earthMap,normalMap,specularMap,cloudMap] = await Promise.all([
+        loader.loadAsync(base+'earth_atmos_2048.jpg'),
+        loader.loadAsync(base+'earth_normal_2048.jpg'),
+        loader.loadAsync(base+'earth_specular_2048.jpg'),
+        loader.loadAsync(base+'earth_clouds_1024.png')
+      ]);
+      earthMap.colorSpace = THREE.SRGBColorSpace;
+      cloudMap.colorSpace = THREE.SRGBColorSpace;
+
+      const earth = new THREE.Mesh(
+        new THREE.SphereGeometry(1,128,128),
+        new THREE.MeshPhongMaterial({
+          map:earthMap,
+          normalMap,
+          normalScale:new THREE.Vector2(.75,.75),
+          specularMap,
+          specular:new THREE.Color(0x5f87a8),
+          shininess:18
+        })
+      );
+      group.add(earth);
+
+      const clouds = new THREE.Mesh(
+        new THREE.SphereGeometry(1.012,96,96),
+        new THREE.MeshPhongMaterial({map:cloudMap,transparent:true,depthWrite:false,opacity:.58})
+      );
+      group.add(clouds);
+
+      const atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(1.055,96,96),
+        new THREE.ShaderMaterial({
+          transparent:true,
+          side:THREE.BackSide,
+          blending:THREE.AdditiveBlending,
+          vertexShader:`varying vec3 vNormal; void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+          fragmentShader:`varying vec3 vNormal; void main(){float rim=pow(1.0-max(dot(vNormal,vec3(0.0,0.0,1.0)),0.0),3.0);gl_FragColor=vec4(0.16,0.72,1.0,rim*.48);}`
+        })
+      );
+      group.add(atmosphere);
+
+      const ambient = new THREE.AmbientLight(0x557799,1.15);
+      scene.add(ambient);
+      const sun = new THREE.DirectionalLight(0xffffff,2.6);
+      sun.position.set(4,2,5);
+      scene.add(sun);
+      const rim = new THREE.DirectionalLight(0x2aa8ff,.45);
+      rim.position.set(-4,-1,-3);
+      scene.add(rim);
+
+      function size(){
+        const w=realCanvas.clientWidth||window.innerWidth;
+        const h=realCanvas.clientHeight||window.innerHeight;
+        renderer.setSize(w,h,false);
+        camera.aspect=w/h;
+        camera.updateProjectionMatrix();
+      }
+      size();
+      window.addEventListener('resize',size);
+
+      window.__EARTHPULSE_REAL_EARTH__ = {renderer,scene,camera,controls,group,earth,clouds};
+      realCanvas.classList.remove('loading');
+
+      function render(){
+        if(!overlay.classList.contains('open')) return;
+        controls.update();
+        earth.rotation.y += .00055;
+        clouds.rotation.y += .00072;
+        renderer.render(scene,camera);
+        requestAnimationFrame(render);
+      }
+      render();
+    }catch(err){
+      console.warn('EarthPulse realistic globe unavailable; using fallback globe.',err);
+      realCanvas.style.display='none';
+      document.getElementById('ep-canvas').style.opacity='1';
+      document.getElementById('ep-canvas').style.pointerEvents='auto';
+    }
+  }
+  initRealEarth();
 
   const canvas = document.getElementById('ep-canvas');
   const ctx = canvas.getContext('2d');
@@ -125,8 +243,8 @@
   function startMission(){mission=Math.floor(Math.random()*EVENTS.length);const e=EVENTS[mission];rotY=-e.lon*Math.PI/180;rotX=e.lat*Math.PI/180;document.getElementById('ep-mission-copy').textContent='Find the highlighted '+e.type.toLowerCase()+' marker and click it.';toast('Mission target selected');}
   function hit(x,y){let best=-1,bd=24;EVENTS.forEach((e,i)=>{const p=project(e.lat,e.lon);if(p.z<=-0.15)return;const d=Math.hypot(p.x-x,p.y-y);if(d<bd){bd=d;best=i;}});if(best<0)return; if(mission===best){toast('Mission complete · +100 XP');mission=-1;document.getElementById('ep-mission-copy').textContent='Mission complete. Start another mission or inspect an event.';}else focusEvent(best);}
 
-  function open(){overlay.classList.add('open');resize();cancelAnimationFrame(raf);frame();}
-  function close(){overlay.classList.remove('open');auto=false;mission=-1;}
+  function open(){overlay.classList.add('open');resize();cancelAnimationFrame(raf);frame();const real=window.__EARTHPULSE_REAL_EARTH__;if(real){real.controls.enabled=true;}}
+  function close(){overlay.classList.remove('open');auto=false;mission=-1;const real=window.__EARTHPULSE_REAL_EARTH__;if(real)real.controls.enabled=false;}
   window.EarthPulseOpenGlobe=open;
   window.EarthPulseCloseGlobe=close;
 
