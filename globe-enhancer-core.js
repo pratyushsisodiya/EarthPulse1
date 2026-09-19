@@ -15,26 +15,36 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    #ep-overlay{position:fixed;inset:0;z-index:2147483000;display:none;background:radial-gradient(circle at 50% 42%,#08243a 0,#020617 60%,#01030a 100%);color:#e2e8f0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+    #ep-overlay{position:fixed;inset:0;z-index:2147483000;display:none;background:radial-gradient(circle at 42% 38%,#0b3049 0,#020617 48%,#01030a 100%);color:#e2e8f0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
     #ep-overlay.open{display:block}
-    #ep-stage{position:absolute;inset:14px;border:1px solid rgba(103,232,249,.2);border-radius:26px;overflow:hidden;background:radial-gradient(circle at 42% 42%,rgba(14,165,233,.09),rgba(2,6,23,.94) 62%);box-shadow:0 30px 120px rgba(0,0,0,.6)}
+    #ep-stage{position:absolute;inset:12px;border:1px solid rgba(125,211,252,.18);border-radius:30px;overflow:hidden;background:radial-gradient(circle at 38% 43%,rgba(14,165,233,.12),rgba(2,6,23,.92) 58%);box-shadow:0 35px 140px rgba(0,0,0,.72)}
+    #ep-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.035),transparent 28%,transparent 72%,rgba(103,232,249,.025))}
     #ep-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
     #ep-canvas.drag{cursor:grabbing}
-    .ep-glass{background:rgba(2,6,23,.72);border:1px solid rgba(148,163,184,.15);box-shadow:0 10px 35px rgba(0,0,0,.28);backdrop-filter:blur(16px)}
-    #ep-top{position:absolute;top:16px;left:16px;right:16px;z-index:5;display:flex;align-items:center;gap:10px;pointer-events:none}
-    #ep-brand{padding:10px 13px;border-radius:14px;display:flex;gap:10px;align-items:center}
-    #ep-dot{width:9px;height:9px;border-radius:50%;background:#67e8f9;box-shadow:0 0 16px #67e8f9;flex:none}
-    #ep-title{font-size:12px;font-weight:950;letter-spacing:.14em}#ep-sub{font-size:8px;color:#64748b;letter-spacing:.12em;margin-top:2px}
+    .ep-glass{background:rgba(2,6,23,.62);border:1px solid rgba(148,163,184,.14);box-shadow:0 14px 45px rgba(0,0,0,.30);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    #ep-top{position:absolute;top:18px;left:18px;right:18px;z-index:5;display:flex;align-items:center;gap:10px;pointer-events:none}
+    #ep-brand{padding:11px 14px;border-radius:15px;display:flex;gap:10px;align-items:center}
+    #ep-dot{width:9px;height:9px;border-radius:50%;background:#67e8f9;box-shadow:0 0 18px #67e8f9;flex:none}
+    #ep-title{font-size:12px;font-weight:950;letter-spacing:.14em}#ep-sub{font-size:8px;color:#64748b;letter-spacing:.13em;margin-top:3px}
     #ep-live{padding:9px 11px;border-radius:12px;font-size:9px;font-weight:900;color:#86efac;letter-spacing:.1em}#ep-live i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;margin-right:6px}
-    #ep-close{margin-left:auto;pointer-events:auto;border:1px solid rgba(148,163,184,.2);background:rgba(15,23,42,.85);color:#fff;border-radius:11px;padding:9px 12px;cursor:pointer;font-weight:900}
-    #ep-side{position:absolute;top:78px;right:16px;bottom:16px;width:285px;z-index:5;display:flex;flex-direction:column;gap:9px;pointer-events:none}
-    .ep-card{border-radius:16px;padding:13px;pointer-events:auto}.ep-card h3{font-size:9px;letter-spacing:.13em;color:#94a3b8;margin:0 0 8px}
-    .ep-stat{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid rgba(148,163,184,.09);font-size:10px}.ep-stat:first-of-type{border-top:0}.ep-val{font-weight:900;color:#bae6fd}
-    #ep-events{overflow:auto;max-height:240px}.ep-event{padding:9px 0;border-top:1px solid rgba(148,163,184,.08);cursor:pointer}.ep-event:first-child{border-top:0}.ep-event:hover b{color:#67e8f9}.ep-event b{font-size:10px}.ep-event span{display:block;color:#64748b;font-size:8px;margin-top:3px}
-    #ep-mission{margin-top:auto}.ep-copy{font-size:9px;color:#94a3b8;line-height:1.5;margin:0 0 9px}.ep-actions{display:flex;gap:6px;flex-wrap:wrap}.ep-btn{border:1px solid rgba(148,163,184,.2);background:rgba(15,23,42,.86);color:#cbd5e1;border-radius:9px;padding:7px 9px;font-size:9px;font-weight:850;cursor:pointer}.ep-btn:hover{border-color:rgba(103,232,249,.45);color:#fff}.ep-primary{background:rgba(8,145,178,.16);border-color:rgba(34,211,238,.3);color:#a5f3fc}
-    #ep-bottom{position:absolute;left:16px;bottom:16px;z-index:5;display:flex;gap:6px;align-items:center}.ep-help{padding:8px 10px;border-radius:11px;font-size:8px;color:#64748b}
-    #ep-toast{position:absolute;left:50%;bottom:22px;transform:translate(-50%,16px);opacity:0;transition:.2s;z-index:20;background:rgba(15,23,42,.95);border:1px solid rgba(103,232,249,.28);border-radius:11px;padding:9px 12px;font-size:9px;font-weight:850;pointer-events:none}.show{opacity:1!important;transform:translate(-50%,0)!important}
-    @media(max-width:800px){#ep-side{left:10px;right:10px;width:auto;top:auto;height:43%;bottom:10px;display:block;overflow:auto}.ep-card{margin-bottom:7px}#ep-events{max-height:125px}#ep-help{display:none}#ep-bottom{left:10px;bottom:10px}#ep-live{display:none}#ep-stage{inset:8px;border-radius:20px}#ep-top{top:9px;left:9px;right:9px}}
+    #ep-close{margin-left:auto;pointer-events:auto;border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.78);color:#fff;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:900;transition:.2s}
+    #ep-close:hover{border-color:rgba(103,232,249,.45);transform:translateY(-1px)}
+    #ep-side{position:absolute;top:84px;right:18px;bottom:18px;width:310px;z-index:5;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+    .ep-card{border-radius:18px;padding:14px;pointer-events:auto}.ep-card h3{font-size:9px;letter-spacing:.15em;color:#94a3b8;margin:0 0 9px}
+    .ep-card .ep-kicker{font-size:8px;color:#475569;letter-spacing:.09em;margin:-4px 0 8px}
+    .ep-stat{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid rgba(148,163,184,.08);font-size:10px}.ep-stat:first-of-type{border-top:0}.ep-val{font-weight:900;color:#bae6fd}
+    #ep-events{overflow:auto;max-height:230px;padding-right:3px}
+    .ep-event{padding:10px 8px;border:1px solid transparent;border-radius:11px;cursor:pointer;transition:.18s}.ep-event + .ep-event{margin-top:2px}.ep-event:hover{background:rgba(103,232,249,.055);border-color:rgba(103,232,249,.12)}.ep-event:hover b{color:#67e8f9}.ep-event b{font-size:10px}.ep-event span{display:block;color:#64748b;font-size:8px;margin-top:3px}
+    #ep-mission{margin-top:auto}.ep-copy{font-size:9px;color:#94a3b8;line-height:1.55;margin:0 0 10px}.ep-actions{display:flex;gap:7px;flex-wrap:wrap}.ep-btn{border:1px solid rgba(148,163,184,.18);background:rgba(15,23,42,.78);color:#cbd5e1;border-radius:10px;padding:8px 10px;font-size:9px;font-weight:850;cursor:pointer;transition:.18s}.ep-btn:hover{border-color:rgba(103,232,249,.45);color:#fff;transform:translateY(-1px)}.ep-primary{background:linear-gradient(135deg,rgba(8,145,178,.24),rgba(14,116,144,.08));border-color:rgba(34,211,238,.3);color:#a5f3fc}
+    #ep-legend{position:absolute;left:20px;bottom:58px;z-index:5;padding:11px 13px;border-radius:14px;font-size:8px;color:#94a3b8}
+    .ep-legend-row{display:flex;gap:10px;align-items:center}.ep-legend-row + .ep-legend-row{margin-top:6px}.ep-key{width:7px;height:7px;border-radius:50%;box-shadow:0 0 10px currentColor}
+    #ep-controls{position:absolute;left:20px;bottom:18px;z-index:5;display:flex;gap:7px;align-items:center}
+    .ep-help{padding:9px 11px;border-radius:11px;font-size:8px;color:#64748b}
+    #ep-zoom{display:flex;overflow:hidden;border-radius:11px}.ep-zoom button{border:0;border-right:1px solid rgba(148,163,184,.12);background:rgba(15,23,42,.82);color:#cbd5e1;width:34px;height:32px;cursor:pointer;font-weight:900}.ep-zoom button:last-child{border-right:0}.ep-zoom button:hover{background:rgba(103,232,249,.1);color:#fff}
+    #ep-toast{position:absolute;left:50%;bottom:24px;transform:translate(-50%,16px);opacity:0;transition:.2s;z-index:20;background:rgba(15,23,42,.96);border:1px solid rgba(103,232,249,.28);border-radius:12px;padding:10px 14px;font-size:9px;font-weight:850;pointer-events:none;box-shadow:0 15px 45px rgba(0,0,0,.4)}.show{opacity:1!important;transform:translate(-50%,0)!important}
+    @media(max-width:900px){#ep-side{width:280px}#ep-legend{display:none}}
+    @media(max-width:800px){#ep-side{left:10px;right:10px;width:auto;top:auto;height:39%;bottom:10px;display:block;overflow:auto}.ep-card{margin-bottom:7px}#ep-events{max-height:115px}#ep-controls{left:10px;bottom:10px}#ep-help{display:none}#ep-live{display:none}#ep-stage{inset:7px;border-radius:21px}#ep-top{top:9px;left:9px;right:9px}#ep-legend{display:none}}
+    @media(max-width:520px){#ep-title{font-size:10px}#ep-sub{font-size:7px}#ep-brand{padding:9px 10px}#ep-side{height:42%}#ep-controls{bottom:8px}.ep-btn{padding:7px 8px}}
   `;
   document.head.appendChild(style);
 
@@ -49,11 +59,17 @@
         <button id="ep-close">✕</button>
       </div>
       <aside id="ep-side">
-        <section class="ep-card ep-glass"><h3>PLANET STATUS</h3><div class="ep-stat"><span>Tracked events</span><span class="ep-val" id="ep-count">07</span></div><div class="ep-stat"><span>Explorer mode</span><span class="ep-val">3D</span></div><div class="ep-stat"><span>Data label</span><span class="ep-val">DEMO</span></div></section>
+        <section class="ep-card ep-glass"><h3>PLANET STATUS</h3><div class="ep-kicker">EXPLORER TELEMETRY</div><div class="ep-stat"><span>Tracked events</span><span class="ep-val" id="ep-count">07</span></div><div class="ep-stat"><span>Explorer mode</span><span class="ep-val">3D VIEW</span></div><div class="ep-stat"><span>Data label</span><span class="ep-val">DEMO</span></div></section>
         <section class="ep-card ep-glass"><h3>EVENT RADAR · DEMO DATA</h3><div id="ep-events"></div></section>
         <section id="ep-mission" class="ep-card ep-glass"><h3>MISSION MODE</h3><p id="ep-mission-copy" class="ep-copy">Select a mission target, rotate Earth and click the highlighted marker.</p><div class="ep-actions"><button id="ep-start" class="ep-btn ep-primary">▶ Start mission</button><button id="ep-random" class="ep-btn">✦ Random</button></div></section>
       </aside>
-      <div id="ep-bottom"><div class="ep-help ep-glass">Drag · Wheel / pinch · Double-click reset</div><button id="ep-auto" class="ep-btn ep-glass">⟳ Auto</button><button id="ep-reset" class="ep-btn ep-glass">Reset</button></div>
+      <div id="ep-legend" class="ep-glass">
+        <div class="ep-legend-row"><i class="ep-key" style="color:#fb7185;background:#fb7185"></i> Seismic</div>
+        <div class="ep-legend-row"><i class="ep-key" style="color:#f59e0b;background:#f59e0b"></i> Storm</div>
+        <div class="ep-legend-row"><i class="ep-key" style="color:#67e8f9;background:#67e8f9"></i> Climate</div>
+        <div class="ep-legend-row"><i class="ep-key" style="color:#c084fc;background:#c084fc"></i> Solar</div>
+      </div>
+      <div id="ep-controls"><div class="ep-help ep-glass">Drag · scroll/pinch · double-click reset</div><div id="ep-zoom" class="ep-glass"><button id="ep-zoom-out" aria-label="Zoom out">−</button><button id="ep-zoom-in" aria-label="Zoom in">+</button></div><button id="ep-auto" class="ep-btn ep-glass">⟳ Auto</button><button id="ep-reset" class="ep-btn ep-glass">Reset</button></div>
       <div id="ep-toast"></div>
     </div>`;
   document.body.appendChild(overlay);
@@ -110,6 +126,8 @@
   window.addEventListener('resize',()=>{if(overlay.classList.contains('open')){resize();draw();}});
   document.getElementById('ep-close').onclick=close;
   document.getElementById('ep-auto').onclick=()=>{auto=!auto;toast(auto?'Auto rotation on':'Auto rotation off');};
+  document.getElementById('ep-zoom-in').onclick=()=>{zoom=Math.min(1.45,zoom*1.12);resize();toast('Zoom +');};
+  document.getElementById('ep-zoom-out').onclick=()=>{zoom=Math.max(.72,zoom*.89);resize();toast('Zoom −')};
   document.getElementById('ep-reset').onclick=()=>{rotY=.35;rotX=.12;zoom=1;resize();toast('Globe reset');};
   document.getElementById('ep-start').onclick=startMission;
   document.getElementById('ep-random').onclick=randomEvent;
