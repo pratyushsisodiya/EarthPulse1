@@ -31,7 +31,7 @@
 <header class="topbar">
   <div class="brandmark"><i></i>EARTHPULSE</div>
   <nav class="topnav" aria-label="Primary">
-    <a href="#latest">Planet Pulse</a><a href="#latest">Earth Intelligence</a><a href="#latest">Missions</a><a href="#latest">Live Earth</a><a href="#dashboard">Analytics</a><a href="#dashboard">Data</a>
+    <a href="#latest">Planet Pulse</a><a href="#latest">Earth Intelligence</a><a href="#latest">Missions</a><a href="#latest">Live Earth</a><a href="/analytics.html">Analytics</a><a href="/data.html">Data</a>
   </nav>
 </header>
 <section class="hero">
@@ -39,7 +39,7 @@
     <div class="eyebrow">GLOBAL INTELLIGENCE / SYSTEM ONLINE</div>
     <h1>See the planet as a system.</h1>
     <p>Earth intelligence for climate, weather, seismic activity, atmosphere, oceans and space weather — designed as one coherent experience.</p>
-    <div class="actions"><button class="btn primary" id="explore">Explore Earth</button><button class="btn" id="planet">Launch Planet Pulse</button></div>
+    <div class="actions"><button class="btn primary" id="explore">Explore Earth</button><button class="btn" id="planet">Launch Planet Pulse</button><button class="btn" id="ogDashboard">Open OG Dashboard</button></div>
     <div class="hero-orb" aria-hidden="true"></div>
   </div>
 </section>
@@ -53,24 +53,15 @@
     <article class="card card-dark"><div class="card-copy"><div class="card-kicker">LIVE EARTH</div><h3>Watch the<br>world breathe.</h3><p>A cinematic mode where the planet becomes the interface.</p></div><div class="card-art"><div class="visual-globe" style="background:radial-gradient(circle at 38% 30%,#d8f7ff 0,#3ab5da 18%,#0d4561 55%,#020c14 82%);filter:saturate(.8)"></div></div><div class="card-footer"><span>Immersive mode</span><span class="arrow">↗</span></div></article>
   </div>
 </section>
-<section class="dashboard" id="dashboard">
-  <div class="dash-head"><h2>Earth intelligence, fully connected.</h2><p>The existing EarthPulse analytics workspace stays intact below the new product layer, preserving weather, earthquakes, climate, solar, air quality, alerts, sources and AI integrations.</p></div>
-  <div class="frame-wrap"><iframe id="earthpulse-frame" src="/index.html.html" title="EarthPulse analytics dashboard"></iframe></div>
-  <div class="feature-strip">
-    <div class="feature"><small>Interactive</small><h4>Planet Pulse</h4><p>3D Earth, event radar, focus, zoom, auto-rotation and mission exploration.</p></div>
-    <div class="feature"><small>Scientific</small><h4>Earth Intelligence</h4><p>Keep observations visually separate from modeled, inferred or demo information.</p></div>
-    <div class="feature"><small>Responsive</small><h4>Designed for every screen</h4><p>Horizontal product cards on desktop, touch-friendly snapping on mobile.</p></div>
-    <div class="feature"><small>AI</small><h4>Ask EarthPulse</h4><p>Use the integrated EarthPulse AI layer to understand the data in context.</p></div>
-  </div>
-</section>
+
 <footer class="footer">EARTHPULSE · SEE THE PLANET AS A SYSTEM.</footer>
 <script src="/globe-enhancer.js"></script>
 <script>
 const frame=document.getElementById('earthpulse-frame');
 function openPulse(){if(window.EarthPulseOpenGlobe)window.EarthPulseOpenGlobe();else window.dispatchEvent(new Event('earthpulse:open-globe'))}
 document.getElementById('planet').onclick=openPulse;
+document.getElementById('ogDashboard').onclick=()=>{window.location.href='/index.html.html'};
 document.getElementById('explore').onclick=()=>document.getElementById('latest').scrollIntoView({behavior:'smooth'});
-frame.addEventListener('load',()=>{try{const d=frame.contentDocument;d.documentElement.style.height='100%';d.body.style.minHeight='100vh';d.body.style.overflow='auto';const m=d.querySelector('.earthpulse-main');if(m){m.style.overflowY='auto';m.style.overflowX='hidden'}d.querySelectorAll('amp-auto-ads').forEach(e=>e.remove());d.querySelectorAll('script[src*="cdn.ampproject.org/v0/amp-auto-ads"]').forEach(e=>e.remove());d.querySelectorAll('canvas').forEach(c=>c.style.touchAction='none')}catch(_){}});
 window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(max>0?(scrollY/max)*100:0)+'%'},{passive:true});
 </script>
 </body>
