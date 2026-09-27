@@ -21,14 +21,14 @@
 .dashboard{padding:100px 0 120px;background:#080808;border-top:1px solid #161616}.dash-head{max-width:1180px;margin:0 auto;padding:0 22px 35px}.dash-head h2{font-size:clamp(34px,5vw,62px);letter-spacing:-.05em;margin:0}.dash-head p{color:#8d8d8d;max-width:650px;line-height:1.6}.frame-wrap{max-width:1380px;margin:auto;padding:0 18px}.frame-wrap iframe{display:block;width:100%;height:min(980px,86vh);min-height:760px;border:1px solid #202020;border-radius:28px;background:#020617;box-shadow:0 35px 110px rgba(0,0,0,.45)}
 .feature-strip{max-width:1180px;margin:0 auto;padding:80px 22px 120px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feature{padding:24px;border-top:1px solid #2a2a2a}.feature small{display:block;color:#737373;letter-spacing:.1em;text-transform:uppercase;font-size:9px;margin-bottom:10px}.feature h4{margin:0 0 7px;font-size:18px}.feature p{margin:0;color:#8b8b8b;font-size:12px;line-height:1.55}
 .footer{padding:28px 22px 60px;border-top:1px solid #171717;color:#686868;font-size:11px;text-align:center}
-#progress{position:fixed;left:0;top:0;height:2px;background:var(--cyan);width:0;z-index:5000;box-shadow:0 0 15px rgba(103,232,249,.55)}
+#progress{position:fixed;left:0;top:0;height:2px;background:var(--cyan);width:0;z-index:5000;box-shadow:0 0 15px rgba(103,232,249,.55)}.feedback-fab{position:fixed;right:18px;bottom:18px;z-index:4900;border:1px solid rgba(103,232,249,.35);background:rgba(10,10,10,.88);backdrop-filter:blur(12px);color:#bff7ff;border-radius:999px;padding:10px 13px;font-size:9px;font-weight:900;letter-spacing:.12em;box-shadow:0 12px 40px rgba(0,0,0,.35)}.feedback-fab:hover{transform:translateY(-2px);border-color:var(--cyan)}
 @media(max-width:900px){.topnav{gap:18px}.hero{min-height:auto;padding-top:78px}.hero-orb{width:min(78vw,520px)}.carousel{padding-left:18px}.card{flex-basis:min(390px,82vw);height:520px}.feature-strip{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.brandmark{left:14px}.topnav{padding-left:130px;padding-right:10px}.hero h1{font-size:54px}.hero p{font-size:15px}.hero-orb{margin-top:50px}.card{height:500px;border-radius:22px}.card-copy{padding:24px}.card h3{font-size:29px}.carousel{gap:14px}.feature-strip{grid-template-columns:1fr;padding-top:55px}.frame-wrap{padding:0 10px}.frame-wrap iframe{min-height:720px;height:82vh;border-radius:20px}.latest-head,.dash-head{padding-left:16px;padding-right:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div id="progress"></div>
+<div id="progress"></div><a class="feedback-fab" href="/feedback.html" aria-label="Send EarthPulse feedback">FEEDBACK</a>
 <header class="topbar">
   <div class="brandmark"><i></i>EARTHPULSE</div>
   <nav class="topnav" aria-label="Primary">
