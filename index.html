@@ -76,7 +76,7 @@
 const frame=document.getElementById('earthpulse-frame');
 function openPulse(){if(window.EarthPulseOpenGlobe)window.EarthPulseOpenGlobe();else window.dispatchEvent(new Event('earthpulse:open-globe'))}
 document.getElementById('planet').onclick=openPulse;
-document.getElementById('ogDashboard').onclick=()=>{window.location.href='/index.html.html'};
+document.getElementById('ogDashboard').onclick=()=>{window.location.href='/dashboard.html'};
 document.getElementById('explore').onclick=()=>document.getElementById('latest').scrollIntoView({behavior:'smooth'});
 let indiaClicks=0,indiaTimer=0;document.querySelector('.india-hotspot')?.addEventListener('click',e=>{e.stopPropagation();indiaClicks++;clearTimeout(indiaTimer);indiaTimer=setTimeout(()=>indiaClicks=0,1600);if(indiaClicks===3){indiaClicks=0;const map=document.querySelector('.india-map');map.animate([{transform:'translate(-50%,-50%) rotate(-2deg) scale(1)'},{transform:'translate(-50%,-50%) rotate(-2deg) scale(1.13)'},{transform:'translate(-50%,-50%) rotate(-2deg) scale(1)'}],{duration:700});const label=document.querySelector('.india-label');label.textContent='INDIA · SIGNAL FOUND';setTimeout(()=>label.textContent='INDIA',2400)}});
 
